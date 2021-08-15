@@ -1,0 +1,25 @@
+<mat-toolbar class="header" >
+    <span>
+        <a routerLink="/"><i>Soccer APP</i></a>
+    </span>
+    <span class="spacer"></span>
+    <ul>
+
+        <li >
+            <a mat-button routerLink="/posts" routerLinkActive="white">Posts</a>
+        </li>
+        <li *ngIf="!userIsAuthenticated" >
+            <a mat-button routerLink="/auth/login" routerLinkActive="white">Login</a>
+        </li>
+        <li *ngIf="!userIsAuthenticated" >
+            <a mat-button routerLink="/auth/signup" routerLinkActive="white">Sign Up</a>
+        </li>
+        <li *ngIf="userIsAuthenticated" >
+            <button (click)="onLogout()"  mat-button>Logout</button>
+        </li>
+        <li *ngIf="userIsAuthenticated" >
+            <button routerLink="/me"  routerLinkActive="white"  mat-button>Profile</button>
+        </li>
+
+    </ul>
+</mat-toolbar>

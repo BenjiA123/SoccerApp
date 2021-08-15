@@ -1,0 +1,33 @@
+
+mat-form-field,
+textarea{
+    width:100%;
+
+}
+mat-spinner{
+    margin: auto;
+}
+
+input[type='file']
+{
+    visibility: hidden;
+}
+.image-preview{
+    height: 8rem;
+    position: relative;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+.image-preview img{
+    height: 100%;
+}
+button{
+    padding-top: 17px;
+    margin: auto;
+    width:100%;
+}
+.upload{
+    border-radius: 50%;
+    width: 8rem;
+    height:8rem;
+}

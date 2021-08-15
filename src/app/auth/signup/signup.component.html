@@ -1,0 +1,47 @@
+<mat-card class="example-container">
+    <div style="text-align:center">
+        <lottie-animation-view *ngIf="!isLoading" [options]="lottie" [width]="250" [height]="150">
+        </lottie-animation-view>
+    </div>
+    <h1 *ngIf="!isLoading">Sign up</h1>
+    
+    <div *ngIf=" isLoading" style="text-align:center">
+            <lottie-animation-view [options]="lottieSpinner" [width]="500" [height]="350">
+            </lottie-animation-view>
+        </div>
+
+
+
+    <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
+        <mat-form-field appearance="outline">
+            <input matInput name="email" required email placeholder="Email:" #emailInput="ngModel" ngModel type="email">
+            <mat-error *ngIf="!emailInput">Please enter a valid email</mat-error>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <input matInput name="clubName" required placeholder="Club Name:" #clubnameInput="ngModel" ngModel type="string">
+            <mat-error *ngIf="!clubnameInput">Please enter your Teams Name</mat-error>
+
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <input matInput name="username" required placeholder="Username:" #usernameInput="ngModel" ngModel type="string">
+            <mat-error *ngIf="!usernameInput">Please enter your Username </mat-error>
+
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline">
+            <input matInput required name="password" ngModel #passwordInput="ngModel" placeholder="Password: "
+                type="password" [type]="hide ? 'password' : 'text'">
+            <mat-icon mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-error>Please enter a valid Password</mat-error>
+        </mat-form-field>
+        <button mat-stroked-button  *ngIf="!isLoading" color="primary" type="submit">
+            <h5><strong>Sign
+                    Up</strong></h5>
+        </button>
+    </form>
+</mat-card>

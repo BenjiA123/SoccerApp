@@ -1,0 +1,35 @@
+<div *ngIf=" isLoading" style="text-align:center">
+    <lottie-animation-view [options]="lottieSpinner" [width]="500" [height]="350">
+    </lottie-animation-view>
+</div>
+<form (submit)="onSavePost()" [formGroup]="form" *ngIf="!isLoading">
+
+    <div align=center style="text-align:center">
+        <button mat-stroked-button (click)="filePicker.click()" color="primary" type="button" class="upload">Upload
+            Pic</button>
+        <input #filePicker (change)="onImagePicked($event)" type="file">
+    </div>
+
+    <mat-form-field appearance="outline">
+        <input matInput formControlName="title" placeholder="Post Caption" type="text">
+        <mat-error *ngIf="form.get('title').invalid">Please enter a post Caption</mat-error>
+
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <textarea matInput placeholder="Post Content" formControlName="content" rows="4"></textarea>
+        <mat-error *ngIf="form.get('content').invalid">Please enter a post Content</mat-error>
+    </mat-form-field>
+
+    <div class="image-preview" *ngIf="imagePreview !=='' && imagePreview && form.get('image').valid">
+        <img [src]="imagePreview" [alt]="form.value.title">
+
+    </div>
+    <button type="button" mat-stroked-button mat-dialog-close color="warn">Close</button><br>
+    <button mat-stroked-button color="primary" type="submit">
+        Roast🤣❤🤣</button>
+
+
+
+
+</form>

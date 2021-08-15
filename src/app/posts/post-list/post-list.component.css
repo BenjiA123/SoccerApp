@@ -1,0 +1,39 @@
+:host{display: block; margin-top: 1rem;}
+.info-text
+{
+    text-align:center;
+}
+mat-spinner{
+    margin: auto;
+}
+.post-image{
+width: 100%;
+}
+mat-paginator{
+    margin-top: 1rem;
+    border-radius: 1%;
+}
+.post-image img{
+    width: 100%;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5)
+
+}
+
+h1{
+  font-size: 7rem;
+}
+
+.fab{
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+  }
+  mat-card{
+      margin: auto;
+      margin-top: 3rem;
+  }
+  mat-action-row{
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+  }
