@@ -3,20 +3,9 @@ const User = require('../models/userModel')
 const catchAsync = require('../utils/catchAsync')
 const factory = require('../controllers/handlarFactory')
 const AppError = require('../utils/appError')
-const { async } = require('rxjs/internal/scheduler/async')
 
 
-exports.commentOnPost = async (req, res, next) => {
-    const comment = req.params.comment
-    const updatedComment = await Post.findByIdAndUpdate(req.params.id,comment)
-  console.log(updatedComment.comment)
-    res.status(200).json({
-        message: updatedComment.comment
 
-    })
-   
-
-}
 
 const filterObj = (obj, ...allowedFileds) => {
     const newObj = {};

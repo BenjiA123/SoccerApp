@@ -11,12 +11,6 @@ ImageController.uploadUserPhoto,
 ImageController.resizeUserPhoto,
 PostController.createPost)
 
-postRouter.patch('/:comment/:id',
-// You can always blurt from anywhere
-AuthController.protect,
-PostController.commentOnPost)
-
-
 
 postRouter.get('/blurts-around/:distance/center/:latlng/unit/:unit',PostController.getBlurtAround)
 
