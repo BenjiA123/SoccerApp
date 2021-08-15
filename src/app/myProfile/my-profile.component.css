@@ -1,7 +1,11 @@
-mat-card {
-  margin-top: 5%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 60%;
-  margin: auto;
-  text-align: center;
+.example-card {
+  width: 70%;
+  height: 60%;
+  left: 15%;
+  position: relative;
+}
+
+.example-header-image {
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
 }
