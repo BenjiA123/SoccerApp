@@ -1,5 +1,9 @@
-<mat-form-field appearance="outline">
-    <input [(ngModel)]="data.comment" matInput placeholder="Comment">
-</mat-form-field>
-<br>
-<button mat-button [mat-dialog-close]="data.comment" color="primary">COMMENT</button>
+<form (submit)="onComment()" [formGroup]="form">
+
+    <mat-form-field appearance="outline">
+        <input matInput formControlName="comment" placeholder="Comment" type="text">
+        <mat-error *ngIf="form.get('comment').invalid">Please enter a Comment</mat-error>
+
+    </mat-form-field>
+    <button mat-stroked-button color="primary" type="submit">Post</button>
+</form>

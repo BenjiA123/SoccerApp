@@ -18,8 +18,11 @@ import { DialogData } from '../post-list/comment-dialog/comment.interface';
 export class PostCreateComponent implements OnInit {
   lottieSpinner: { path: string; renderer: string; autoplay: boolean; loop: boolean; };
 
-  constructor(public dialogRef: MatDialogRef<CommentDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, public postService: PostService, public route: ActivatedRoute, private authService: AuthService) {
+  constructor(
+   public dialogRef: MatDialogRef<CommentDialogComponent>,
+   public postService: PostService, 
+   public route: ActivatedRoute, 
+   private authService: AuthService) {
     this.lottieSpinner = {
       path: '././assets/trail-loading.json',
       renderer: 'canvas',

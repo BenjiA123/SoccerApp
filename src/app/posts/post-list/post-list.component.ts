@@ -84,22 +84,9 @@ export class PostListComponent implements OnDestroy, OnInit {
   hide = true
   lottieSpinner
 
-  openCommentDialog(id: string): void {
-    const dialogRef = this.dialog.open(CommentDialogComponent,
-      {
-        width: '360px',
-        height: '200px',
-        data: {
-          id: id,
-          comment: this.comment
-        }
-      })
-    dialogRef.afterClosed().subscribe(result => {
-      this.comment = result
-      let comt = this.commentService.addComment(this.comment, id)
-      this.comments.push(comt)
+  openCommentDialog(id: string) {
+    this.dialog.open(CommentDialogComponent)
 
-    });
   }
 
   openCreateComponent() {
