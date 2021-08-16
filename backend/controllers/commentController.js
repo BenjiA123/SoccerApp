@@ -7,14 +7,19 @@ const AppError = require('../utils/appError')
 
 
 
-exports.createComment =factory.createOne(Comment)
+exports.createComment = 
 
-// catchAsync( async (req, res, next) => {
-//     const comment = req.params.comment
-//     const updatedComment = await Post.findByIdAndUpdate(req.params.id,comment)
-//   console.log(updatedComment.comment)
-//     res.status(200).json({
-//         message: "updatedComment.comment"
+catchAsync( async (req, res, next) => {
+    console.log(req.body.postId)
+    const comment = new Comment({
+    senderId:req.user._id,
+    postId:req.body.postId,
+    comment:req.body.comment
+    })
+    const createdComment = await Comment.create(comment)
+    res.status(200).json({
+        status:"success",
+        message: createdComment
 
-//     })
-// })
+    })
+})

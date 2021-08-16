@@ -10,18 +10,17 @@ const userSchema = mongoose.Schema({
 },
 username: {
   type: String,
-  required: false,
+  required: true,
   unique: [true,"This username is already in use"]
 },
 clubName: {
   type: String,
   required: true,
-  unique: true
 },
-// name: {
-//   type: String,
-//   required: [false,""],
-// },
+name: {
+  type: String,
+  required: false
+},
 
 password: {
     type: String,

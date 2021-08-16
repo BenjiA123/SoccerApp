@@ -2,7 +2,7 @@ import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Subject } from 'rxjs';
-const BACKEND_URL = environment.apiUrl + '/posts';
+const BACKEND_URL = environment.apiUrl + '/comments';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,15 +10,21 @@ export class CommentService {
   comment: string
   comments: [] = []
 
+  commentData
   private postsUpdated = new Subject<{ comment: any }>();
   constructor(private http: HttpClient) { }
   addComment(comment, postId) {
-    console.log(comment)
 
-    this.http.patch<{ message: string }>(`${BACKEND_URL}/${comment}/${postId}`, null)
+    this.commentData ={
+      postId,
+      comment,
+    }
+    console.log(this.commentData)
+
+    this.http.post(`${BACKEND_URL}`, this.commentData)
       .subscribe(
         (resComment) => {
-          this.comment = resComment.message
+          console.log(resComment)
 
 
         }
