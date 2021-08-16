@@ -60,7 +60,6 @@ export class PostService {
     .subscribe( () =>{ 
         const updatedPosts = this.posts.filter(post => post._id !== postId)
         this.posts = updatedPosts
-        console.log(this.posts)
         this.postsUpdated.next([...this.posts]);
 })
 
