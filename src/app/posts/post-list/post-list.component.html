@@ -7,11 +7,11 @@
     <br><br>
     <p>{{post.content}}</p>
     <mat-action-row>
-        <button mat-button *ngIf="userIsAuthenticated" color="blue"
+        <button mat-button *ngIf="userIsAuthenticated" color="primary"
         (click)="openCommentDialog(post._id)">COMMENT</button>
 
         
-        <button mat-button *ngIf="userIsAuthenticated && userId === post.creator" color="warn"
+        <button mat-button *ngIf="userIsAuthenticated && userId == post.creator" color="warn"
             (click)="onDelete(post._id)">DELETE</button>
     </mat-action-row>
 </mat-card>

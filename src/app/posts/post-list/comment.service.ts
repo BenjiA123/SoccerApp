@@ -19,7 +19,6 @@ export class CommentService {
       postId,
       comment,
     }
-    console.log(this.commentData)
 
     this.http.post(`${BACKEND_URL}`, this.commentData)
       .subscribe(

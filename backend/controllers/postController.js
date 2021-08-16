@@ -81,7 +81,7 @@ exports.getPost = factory.getOne(Post)
 
 exports.deletePost = catchAsync(async (req, res, next) => {
     await Post.deleteOne({ _id: req.params.id, creator: req.user._id })
-       res.status(204)
+       res.status(204).json()
 })
 
 

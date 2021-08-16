@@ -1,5 +1,5 @@
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthData } from './signup/auth-data.model';
@@ -14,7 +14,7 @@ export class AuthService {
   // Subjects are not recognised in html templates so isAuthenticated Property is needed
   private isAuthenticated = false
   // The value of the boolean subject is changed by next()
-  private authStatusListener = new Subject<boolean>()
+  private authStatusListener = new BehaviorSubject<boolean>(false)
   private tokenTimer: any
   private userId: string
   constructor(private http: HttpClient, private router: Router) { }
@@ -52,7 +52,7 @@ export class AuthService {
   }
 
   getauthStatusListener() {
-    return this.authStatusListener.asObservable()
+    return this.authStatusListener.asObservable();
   }
 
 

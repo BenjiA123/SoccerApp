@@ -10,46 +10,61 @@ const BACKEND_URL = environment.apiUrl + "/posts";
 })
 export class PostService {
   private posts: Post[] = [];
-  private postsUpdated = new Subject<{ posts: Post[]; postCount: number }>();
+  private postsUpdated = new Subject<Post[]>();
   constructor(private http: HttpClient, private router: Router) {}
 
   getPosts() {
 
-   return this.http
-      .get<{ message: string; posts: any; maxPosts: number }>(
-        BACKEND_URL
-      )
-  }
-  // Functions are used with subjects tocreate responsive apps
+    // Set this.posts to something
+   this.http.get(BACKEND_URL)
+   .subscribe(
+    (postData:any)=>{
+      this.posts = postData.doc
+      this.postsUpdated.next([...this.posts])
+    }
+  )
+}
+
+  // Functions are used with subjects to create an object that we can respond to
+  // You can emmit from this file but not from other files
   getPostUpdateListener() {
     return this.postsUpdated.asObservable();
   }
+
   addPost(title: string, content: string, image: File) {
+
     const postData = new FormData();
     postData.append("title", title);
     postData.append("content", content);
     postData.append("imagePath", image, title);
     this.http
-      .post<{ message: string; data: Post }>(BACKEND_URL, postData)
+      .post<{ status: string; data: Post }>(BACKEND_URL, postData)
       .subscribe((responseData) => {
-        console.log(responseData.data._id)
         const post: Post = {
           _id: responseData.data._id,
           title: title,
           content: content,
-          creator: null,
+          creator: responseData.data.creator,
           imagePath: responseData.data.imagePath,
         };
-
+        
         this.posts.push(post);
-        this.postsUpdated.next({ posts: [...this.posts], postCount: null });
-        this.router.navigate(["/"]);
+        this.postsUpdated.next([...this.posts]);
+
       });
   }
 
-  deletePost(postId: String) {
-    return this.http.delete(`${BACKEND_URL}/${postId}`);
-  }
+  
+  deletePost(postId: string) {
+    this.http.delete(`${BACKEND_URL}/${postId}`)
+    .subscribe( () =>{ 
+        const updatedPosts = this.posts.filter(post => post._id !== postId)
+        this.posts = updatedPosts
+        console.log(this.posts)
+        this.postsUpdated.next([...this.posts]);
+})
+
+}
 
   getPost(id: string) {
     return this.http.get<{
