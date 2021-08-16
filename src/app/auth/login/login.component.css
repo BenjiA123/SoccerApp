@@ -1,15 +1,13 @@
-
-mat-form-field{
-    width:100%;
-
+mat-form-field {
+  width: 100%;
 }
-mat-spinner{
-    margin: auto;
+mat-spinner {
+  margin: auto;
 }
-button{
-    margin: auto;
-    width:100%;
+button {
+  margin: auto;
+  width: 100%;
 }
-mat-card{
-    margin: auto;
+mat-card {
+  margin: auto;
 }

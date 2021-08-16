@@ -15,7 +15,6 @@ export class MyProfileComponent {
 
    this.authService.getCurrentUserProfile().subscribe(res =>{
     this.myInfo = res.data
-    console.log(this.myInfo)
 
    })
 

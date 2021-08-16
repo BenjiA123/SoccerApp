@@ -19,7 +19,7 @@ clubName: {
 },
 name: {
   type: String,
-  required: false
+  required: true
 },
 
 password: {

@@ -11,7 +11,9 @@ const BACKEND_URL = environment.apiUrl + '/users'
 })
 export class AuthService {
   private token: string;
+  // Subjects are not recognised in html templates so isAuthenticated Property is needed
   private isAuthenticated = false
+  // The value of the boolean subject is changed by next()
   private authStatusListener = new Subject<boolean>()
   private tokenTimer: any
   private userId: string
@@ -22,16 +24,24 @@ export class AuthService {
   return this.http.get<{data:any}>(BACKEND_URL + '/me')
   }
 
-  createUser(email: string, password: string,clubName:string,username:string) {
+  createUser(
+    email: string,
+    password: string,
+    clubName:string,
+    username:string,
+    name:string,
+    passwordConfirm:string) {
     const authData: AuthData = {
       email: email,
       password: password,
       clubName,
-      username
+      username,
+      name,
+      passwordConfirm
     }
     this.http.post(BACKEND_URL + '/signup', authData)
       .subscribe(result => {
-        this.login(email,password,clubName,username)
+        this.login(email,password,clubName,username,name,passwordConfirm)
         this.router.navigate(["/"])
       },
         error => {
@@ -46,14 +56,26 @@ export class AuthService {
   }
 
 
-  login(email: string, password: string,clubName:string,username:string) {
+  login(
+    email: string,
+    password: string,
+    clubName:string,
+    username:string,
+    name:string,
+    passwordConfirm:string) {
     const authData: AuthData = {
       email: email,
       password: password,
       clubName,
-      username
+      username,
+      name,
+      passwordConfirm
     }
-    this.http.post<{ token: string, expiresIn: number, userId: string }>(BACKEND_URL + '/login', authData)
+    this.http.post<
+    { token: string,
+      expiresIn: number,
+      userId: string }
+    >(BACKEND_URL + '/login', authData)
       .subscribe((result:any) => {
         const token = result.token
         this.token = token
@@ -63,10 +85,9 @@ export class AuthService {
           this.userId = result.user._id
           this.authStatusListener.next(true)
 
-          
           const currentDate = new Date();
           const expirationDate = new Date(currentDate.getTime() + expiresInDuration*1000);
-          this.saveAuthData(token,expirationDate,null)
+          this.saveAuthData(token,expirationDate,this.userId)
 
           this.router.navigate(["/"])
         }
@@ -79,7 +100,6 @@ export class AuthService {
   }
   private setAuthTimer(duration: number) {
     this.tokenTimer = setTimeout(() => {
-      // this.logout()
     }, duration)
   }
   getIsAuth() {

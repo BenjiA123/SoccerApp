@@ -20,6 +20,7 @@ export class PostService {
         BACKEND_URL
       )
   }
+  // Functions are used with subjects tocreate responsive apps
   getPostUpdateListener() {
     return this.postsUpdated.asObservable();
   }

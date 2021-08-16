@@ -32,11 +32,13 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.authStatusSub = this.authService.getauthStatusListener().subscribe(
       authStatus => {
-        this.isLoading = false
+        if(authStatus) this.isLoading = false
+ 
       }
     )
   }
   ngOnDestroy() {
+    // Subscription give you a place to store your subscription so you can unsubscribe to revent lose data
     this.authStatusSub.unsubscribe()
   }
   onLogin(form: NgForm) {
@@ -46,7 +48,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       return
     }
     // For now you cant log in with username 
-    this.authService.login(form.value.email, form.value.password, null,null)
+    this.authService.login(form.value.email, form.value.password, null,null,null,null)
   }
 
 }
