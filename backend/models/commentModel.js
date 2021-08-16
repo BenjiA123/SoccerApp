@@ -7,9 +7,11 @@ const commentSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    edited:{type:Boolean,required:true,default:false}, //This tells people if the comment has been edited
     created_at: { 
         type: Date, 
         default: Date.now() },
+        likes:{type:Number}
 })
 
 

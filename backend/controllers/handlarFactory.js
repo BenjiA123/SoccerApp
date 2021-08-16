@@ -3,24 +3,6 @@ const AppError = require('../utils/appError');
 
 const catchAsync = require('../utils/catchAsync')
 
-exports.getAll = Model =>
-
- catchAsync(async (req, res, next) => {
-    let filter = {};
-    if (req.params.tourId) filter = { tour: req.params.tourId };
-    const features = new APIFeatures(Model.find(filter), req.query)
-      .filter()
-      .sort()
-      .limit()
-      .paginate();
-    // const doc = await features.query.explain(); //The explain method explains the whole document
-    const doc = await features.query
-    res.status(200).json({
-      status: 'success',
-      result: doc.length,
-      doc,
-    });
-  });
 
   exports.getOne = Model =>
 
@@ -84,3 +66,41 @@ exports.getDataAroundMe = Model => catchAsync(async(req,res,next)=>{
     data:doc
   })
 })
+
+
+exports.filterFunction = (Model)=>
+    catchAsync(async(req,res,next)=>{
+      let filterObj = {}
+      if(req.params.postId) filterObj = {postId:req.params.postId}
+      else if(req.params.senderId) filterObj = {senderId:req.params.senderId}
+      else if(req.params.postId && req.params.senderId) filterObj = {postId:req.params.postId, senderId:req.params.senderId}
+
+    
+        const doc = await Model.find(filterObj)
+        
+        res.status(200).json({
+            status:"success",
+            result:doc.length,
+            doc
+            
+        })
+    })
+
+    exports.getAll = Model =>
+
+ catchAsync(async (req, res, next) => {
+    let filter = {};
+    if (req.params.tourId) filter = { tour: req.params.tourId };
+    const features = new APIFeatures(Model.find(filter), req.query)
+      .filter()
+      .sort()
+      .limit()
+      .paginate();
+    // const doc = await features.query.explain(); //The explain method explains the whole document
+    const doc = await features.query
+    res.status(200).json({
+      status: 'success',
+      result: doc.length,
+      doc,
+    });
+  });
