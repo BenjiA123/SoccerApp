@@ -58,9 +58,16 @@ export class AuthService {
         const token = result.token
         this.token = token
         if (token) {
+          const expiresInDuration = result.expiresIn
           this.isAuthenticated = true
           this.userId = result.user._id
           this.authStatusListener.next(true)
+
+          
+          const currentDate = new Date();
+          const expirationDate = new Date(currentDate.getTime() + expiresInDuration*1000);
+          this.saveAuthData(token,expirationDate,null)
+
           this.router.navigate(["/"])
         }
 
@@ -71,10 +78,9 @@ export class AuthService {
       )
   }
   private setAuthTimer(duration: number) {
-    console.log(`Setting Timer ${duration}`)
     this.tokenTimer = setTimeout(() => {
-      this.logout()
-    }, duration * 1000)
+      // this.logout()
+    }, duration)
   }
   getIsAuth() {
     return this.isAuthenticated
@@ -82,25 +88,25 @@ export class AuthService {
   getToken() {
     return this.token
   }
+  private clearAuthData() {
+    localStorage.removeItem('token')
+    localStorage.removeItem('userId')
+    localStorage.removeItem('expiration')
+  }
   logout() {
     this.token = null
     this.isAuthenticated = false
     this.userId = null
     this.authStatusListener.next(false)
-    this.router.navigate(["/"])
     clearTimeout(this.tokenTimer);
     this.clearAuthData()
+    this.router.navigate(["/"])
   }
   private saveAuthData(token: string, expirationDate: Date, userId: string) {
     localStorage.setItem('token', token)
     localStorage.setItem('expiration', expirationDate.toISOString())
     localStorage.setItem('userId', userId)
 
-  }
-  private clearAuthData() {
-    localStorage.removeItem('token')
-    localStorage.removeItem('userId')
-    localStorage.removeItem('expiration')
   }
   autoAuthUser() {
     const authInformation = this.getAuthData()
@@ -113,7 +119,7 @@ export class AuthService {
       this.token = authInformation.token
       this.isAuthenticated = true
       this.userId = authInformation.userId
-      this.setAuthTimer(expiresIn / 1000)
+      this.setAuthTimer(expiresIn)
       this.authStatusListener.next(true)
     }
   }

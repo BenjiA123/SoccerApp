@@ -28,6 +28,7 @@ const createSendToken = (user, statusCode, res) => {
     res.status(statusCode).json({
       status: 'success',
       token,
+      expiresIn:30000000000,//This is neccessary for the front end
   
       data: {
         user,
@@ -64,13 +65,14 @@ if (!user || !(await user.correctPassword(password, user.password))) {
 }
 
   const token = signToken(user._id);
-
+  
     // I prevented the password from coming up in the search
     user.password =undefined
     
   res.status(200).json({
     status:"success",
     token,
+    expiresIn:30000000000,
     user,
   });
 });
