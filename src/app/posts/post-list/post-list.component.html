@@ -1,4 +1,7 @@
-
+<div *ngIf=" isLoading" style="text-align:center">
+    <lottie-animation-view [options]="lottieSpinner" [width]="500" [height]="350">
+    </lottie-animation-view>
+</div>
 
 <mat-card *ngFor="let post of posts">
     <strong>{{post.title}}</strong>

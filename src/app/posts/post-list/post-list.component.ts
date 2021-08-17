@@ -16,6 +16,8 @@ import { PostCreateComponent } from '../post-create/post-create.component';
 })
 export class PostListComponent implements OnDestroy, OnInit {
 
+  lottieSpinner: { path: string; renderer: string; autoplay: boolean; loop: boolean; };
+
   public posts: Post[] = [];
   public comments: any[] = []
 
@@ -23,18 +25,12 @@ export class PostListComponent implements OnDestroy, OnInit {
   title: any;
   content: any;
   imageUrl: any;
-  lottieNo: { path: string; renderer: string; autoplay: boolean; loop: boolean; };
   constructor(
     public authService: AuthService,
     public postService: PostService,
     private commentService: CommentService,
     public dialog: MatDialog) {
-    this.lottieNo = {
-      path: '././assets/chair-dude.json',
-      renderer: 'canvas',
-      autoplay: true,
-      loop: true
-    };
+
     this.lottieSpinner = {
       path: '././assets/trail-loading.json',
       renderer: 'canvas',
@@ -88,9 +84,6 @@ export class PostListComponent implements OnDestroy, OnInit {
     this.authStatusSub.unsubscribe();
   }
   comment: string;
-  hide = true
-  lottieSpinner
-
   openCommentDialog(postId) {
     // Send post Id from here to dialog
     this.dialog.open(CommentDialogComponent, {

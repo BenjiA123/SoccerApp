@@ -1,16 +1,22 @@
-<div style="text-align:center">
-    <lottie-animation-view *ngIf="!isLoading" [options]="lottie" [width]="250" [height]="150">
+<div *ngIf=" isLoading" style="text-align:center">
+    <lottie-animation-view [options]="lottieSpinner" [width]="500" [height]="350">
     </lottie-animation-view>
 </div>
+
+<div *ngIf=" isLoading" style="text-align:center">
+    <lottie-animation-view [options]="lottieSpinner" [width]="500" [height]="350">
+    </lottie-animation-view>
+</div>
+
+
+
 <mat-card class="example-container">
     <h1 *ngIf="!isLoading">Sign up</h1>
     
-    <div *ngIf=" isLoading" style="text-align:center">
-            <lottie-animation-view [options]="lottieSpinner" [width]="500" [height]="350">
-            </lottie-animation-view>
-        </div>
-
-
+    <div style="text-align:center">
+        <lottie-animation-view *ngIf="!isLoading" [options]="lottie" [width]="250" [height]="150">
+        </lottie-animation-view>
+    </div>
 
     <form (submit)="onSignup(signupForm)" #signupForm="ngForm" *ngIf="!isLoading">
         <mat-form-field appearance="outline">
