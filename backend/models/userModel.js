@@ -8,6 +8,11 @@ const userSchema = mongoose.Schema({
     required: true,
     unique: true
 },
+description:{
+  type:String,
+  required:true,
+  default:"I love this club So much"
+},
 username: {
   type: String,
   required: true,
@@ -43,7 +48,7 @@ role:{
 },
 imagePath:{
     type:String,
-    default:"default.jpeg"
+    default:"http://localhost:4000/images/default.jpg"
 },
 active:{
   type:Boolean,

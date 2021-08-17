@@ -4,5 +4,6 @@ export interface AuthData{
     username:string,
     clubName:string,
     name:string,
-    passwordConfirm:string
+    passwordConfirm:string,
+    description?:string
 }

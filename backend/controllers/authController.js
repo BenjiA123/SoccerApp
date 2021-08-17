@@ -42,6 +42,9 @@ const createSendToken = (user, statusCode, res) => {
       username: req.body.username,
       clubName:req.body.clubName,
       email: req.body.email,
+      description:`Hey, my name is ${req.body.name} and I am new to FclubHouse.
+        I love ${req.body.clubName}
+      It is the Strongest Club`,
       locationCordinate:req.body.locationCordinate,
       password: req.body.password,
       passwordConfirm:req.body.passwordConfirm

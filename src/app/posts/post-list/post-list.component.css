@@ -34,6 +34,10 @@ mat-card {
   margin: auto;
   margin-top: 3rem;
 }
+mat-card:first-of-type {
+  margin-top: 8rem;
+}
+
 mat-action-row {
   position: absolute;
   bottom: 1rem;
