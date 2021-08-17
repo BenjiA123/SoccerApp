@@ -8,22 +8,22 @@ const BACKEND_URL = environment.apiUrl + '/comments';
 })
 export class CommentService {
   comment: string
-  comments: [] = []
+  comments: any[] = []
 
   commentData
-  private postsUpdated = new Subject<{ comment: any }>();
+  private commentsUpdated = new Subject();
   constructor(private http: HttpClient) { }
-  addComment(comment, postId) {
+  addComment(comment:string, postId:string) {
     this.commentData ={
       postId,
       comment,
     }
     this.http.post(`${BACKEND_URL}`, this.commentData)
       .subscribe(
-        (resComment) => {
-          console.log(resComment)
-
-
+        (resComment:any) => {
+          console.log(resComment.message)
+          this.comments.push(resComment.message)
+          this.commentsUpdated.next([...this.comments])
         }
 
       )
@@ -35,15 +35,18 @@ export class CommentService {
     .subscribe(
       (commentData:any)=>{
 
-        console.log(commentData)
-        // this.comments = postData.doc
-        // this.postsUpdated.next([...this.posts])
+        this.comments = commentData.doc
+        console.log(this.comments)
+        this.commentsUpdated.next([...this.comments])
       }
     )
 
 
   }
 
+  getCommentListener() {
+    return this.commentsUpdated.asObservable();
+  }
 
 
 

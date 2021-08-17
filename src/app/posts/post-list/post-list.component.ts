@@ -17,7 +17,7 @@ import { PostCreateComponent } from '../post-create/post-create.component';
 export class PostListComponent implements OnDestroy, OnInit {
 
   public posts: Post[] = [];
-  comments: any = []
+  public comments: any[] = []
 
   form: FormGroup;
   title: any;
@@ -47,7 +47,7 @@ export class PostListComponent implements OnDestroy, OnInit {
   userId: string;
   isLoading = false;
 
-  public userIsAuthenticated = false;
+    public userIsAuthenticated = false;
   ngOnInit() {
     this.userId = this.authService.getUserId();
 
@@ -58,6 +58,13 @@ export class PostListComponent implements OnDestroy, OnInit {
         this.posts = posts
       });
 
+  //  Listening to changes in comments for subject
+      this.commentService.getCommentListener()
+      .subscribe(
+        (data:any[])=>{
+          this.comments = data
+        }
+      )
 
       this.userIsAuthenticated = this.authService.getIsAuth()
       // This isnt bening triggered but when triggered fetches the current auth Status
@@ -92,15 +99,21 @@ export class PostListComponent implements OnDestroy, OnInit {
 
   }
   getCommentsOnOnePost(postId){
-    console.log(postId)
     this.commentService.getCommentsOnOnePost(postId)
 
   }
+
 
   openCreateComponent() {
     this.dialog.open(PostCreateComponent)
 
   }
+
+
+
+
+
+
 }
 
 
