@@ -14,7 +14,7 @@ const catchAsync = require('../utils/catchAsync')
       }
       res.status(201).json({
         status:'success',
-        data: {doc}
+        data: doc
     })
   })
 

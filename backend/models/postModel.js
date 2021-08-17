@@ -5,6 +5,7 @@ const postSchema = mongoose.Schema({
     imagePath: {type:String,required:false},
     locationCoordinate:{type:[Number],required:false,},
     comment:{type:[String],required:false},
+    created_at:{type:Date,default:Date.now()},
     creator:{type:mongoose.Schema.Types.ObjectId,ref:"User",required:true}
 });
 

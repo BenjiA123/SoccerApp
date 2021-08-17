@@ -7,6 +7,8 @@ userRouter.post("/signup", AuthController.signup);
 userRouter.post("/login", AuthController.login);
 
 
+userRouter.get('', UserController.getUsers)
+
 // api/users/users-around/100/center/2,3/unit/mi
 userRouter.get('/me',AuthController.protect,UserController.getMe)
 
@@ -17,7 +19,6 @@ userRouter.delete('/deleteMe',AuthController.protect,UserController.deleteMe)
 
 userRouter.get('/users-around/:distance/center/:latlng/unit/:unit',AuthController.protect,UserController.getUsersAroundMe)
 
-userRouter.get('',AuthController.protect,AuthController.restrictTo("MD","admin"), UserController.getUsers)
 userRouter.route('/:id').get( UserController.getUser)
 .delete(AuthController.protect,
     AuthController.restrictTo("MD","admin"), 

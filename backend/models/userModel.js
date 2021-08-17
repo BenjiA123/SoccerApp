@@ -51,6 +51,10 @@ active:{
   default:true
 
 },
+created_at:{
+  type:Date,
+  default:Date.now()
+},
 
 // Create the location at where the blurt was made.... nahhhhhh
 locationCordinate: [Number],

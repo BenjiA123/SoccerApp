@@ -3,7 +3,7 @@
     </lottie-animation-view>
 </div>
 
-<mat-card *ngFor="let post of posts">
+<mat-card class="post_card" *ngFor="let post of posts">
     <strong>{{post.title}}</strong>
     <br><br>
     <div class="post-image"  >
@@ -13,7 +13,7 @@
     <p>{{post.content}}</p>
 
     <div *ngFor="let commentData of comments">
-    <p  *ngIf="post._id === commentData.postId" [routerLink]="['/user',commentData.senderId.username]">
+    <p class="comment_reference"  *ngIf="post._id === commentData.postId" [routerLink]="['/user',commentData.senderId.username]">
         {{commentData.comment | json}} postedBy @{{commentData.senderId.username | json}}</p>
     </div>
     
@@ -28,12 +28,26 @@
 
 
         <button mat-button *ngIf="userIsAuthenticated" color="primary"
-        (click)="openCommentDialog(post._id)">COMMENT</button>
+        (click)="openCommentDialog(post._id)"><mat-icon>comment</mat-icon></button>
 
         
         <button mat-button *ngIf="userIsAuthenticated && userId == post.creator" color="warn"
-            (click)="onDelete(post._id)">DELETE</button>
+            (click)="onDelete(post._id)"><mat-icon>delete</mat-icon></button>
     </mat-action-row>
+</mat-card>
+
+
+<mat-card class="side_bar">
+    <mat-card-title>USERS</mat-card-title>
+    <hr>
+    <div class="side_bar_user_list">
+        <ul class="side_bar_ul">
+            <li *ngFor="let user of recentUsers" [routerLink]="['/user',user.username]" class="side_bar_user_element">{{user?.username}}</li>
+            <!-- <hr> -->
+        </ul>
+
+    </div>
+
 </mat-card>
 
 <button 

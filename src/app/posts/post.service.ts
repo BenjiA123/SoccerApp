@@ -5,6 +5,7 @@ import { Subject } from "rxjs";
 import { Router } from "@angular/router";
 import { environment } from "./../../environments/environment";
 const BACKEND_URL = environment.apiUrl + "/posts";
+const BACKEND_USER_URL = environment.apiUrl + "/users";
 @Injectable({
   providedIn: "root",
 })
@@ -118,5 +119,13 @@ export class PostService {
 
         // )
       });
+  }
+
+  getRecentUsers(){
+
+    // /users?fields=name,username,imagePath,created_at&sort=-created_at&limit=3
+
+    return this.http
+    .get(`${BACKEND_USER_URL}/?fields=name,username,imagePath,created_at&sort=-created_at&limit=10`)
   }
 }

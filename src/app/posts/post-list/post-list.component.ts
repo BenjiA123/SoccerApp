@@ -42,9 +42,19 @@ export class PostListComponent implements OnDestroy, OnInit {
   private authStatusSub: Subscription;
   userId: string;
   isLoading = false;
+  recentUsers
 
     public userIsAuthenticated = false;
   ngOnInit() {
+
+
+    this.postService.getRecentUsers().subscribe(
+      (users:any)=>{
+        this.recentUsers = users.doc
+      }
+    )
+
+
     this.userId = this.authService.getUserId();
 
    this.postService.getPosts()
@@ -101,11 +111,6 @@ export class PostListComponent implements OnDestroy, OnInit {
     this.dialog.open(PostCreateComponent)
 
   }
-
-
-
-
-
 
 }
 
