@@ -35,7 +35,7 @@ mat-card {
   margin-top: 3rem;
 }
 mat-card:first-of-type {
-  margin-top: 8rem;
+  margin-top: 6rem;
 }
 
 mat-action-row {
@@ -92,4 +92,21 @@ mat-action-row {
   margin-bottom: -0.95rem;
   cursor: pointer;
   /* background-color: rgb(170, 211, 247); */
+}
+
+@media screen and (max-width: 480px) {
+  .side_bar {
+    visibility: hidden;
+  }
+
+  /* mat-card {
+    margin: auto;
+    width: 70%;
+    margin-top: 3rem;
+  } */
+  .post_card {
+    position: relative;
+
+    width: 70%;
+  }
 }
