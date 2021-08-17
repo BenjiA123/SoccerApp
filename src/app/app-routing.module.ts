@@ -14,6 +14,7 @@ const appRoutes: Routes = [
   { path: "auth", loadChildren: "./auth/auth-module#AuthModule" }
   ,
   { path: 'user/:username', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule) },
+  { path: 'settings', loadChildren: () => import('./setting-page/setting-page.module').then(m => m.SettingPageModule) },
   { path: "**", redirectTo: "/", pathMatch: "full" },
 ];
 

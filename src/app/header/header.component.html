@@ -24,11 +24,11 @@
         
 
         <li *ngIf="userIsAuthenticated" class="navigation__item">
-            <a routerLink="/me" class="navigation__link">Settings</a>
+            <a routerLink="/settings" class="navigation__link">Settings</a>
           </li>
 
           <li *ngIf="userIsAuthenticated" class="navigation__item">
-            <a routerLink="/me" (click)="onLogout()" class="navigation__link">Logout</a>
+            <a routerLink="/posts" (click)="onLogout()" class="navigation__link">Logout</a>
           </li>
 
       </ul>
