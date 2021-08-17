@@ -2,6 +2,21 @@ const User = require("../models/userModel")
 const factory = require('../controllers/handlarFactory')
 const catchAsync = require('../utils/catchAsync')
 
+
+
+exports.getOneByUserName = catchAsync(async (req,res,next)=>{
+    const doc = await User.find({username:req.params.username}).select('-__v -password')
+    if (!doc) {
+      return next(new AppError(`No document Found this with ID`, 404));
+    }
+    res.status(201).json({
+      status:'success',
+      data: doc
+  })
+})
+
+
+
 exports.getUsers = factory.getAll(User)
 exports.getUser = factory.getOne(User)
 

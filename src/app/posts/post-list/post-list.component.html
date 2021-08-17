@@ -10,8 +10,8 @@
     <p>{{post.content}}</p>
 
     <div *ngFor="let commentData of comments">
-    <p  *ngIf="post._id === commentData.postId">
-        {{commentData.comment | json}} postedBy @{{commentData.senderId.username | async}}</p>
+    <p  *ngIf="post._id === commentData.postId" [routerLink]="['/user',commentData.senderId.username]">
+        {{commentData.comment | json}} postedBy @{{commentData.senderId.username | json}}</p>
     </div>
     
 

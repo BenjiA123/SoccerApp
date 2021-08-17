@@ -13,7 +13,8 @@ const appRoutes: Routes = [
 //  Change from lazy loading
   { path: "auth", loadChildren: "./auth/auth-module#AuthModule" }
   ,
-  { path: "**", redirectTo: "/", pathMatch: "full" }
+  { path: 'user/:username', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule) },
+  { path: "**", redirectTo: "/", pathMatch: "full" },
 ];
 
 

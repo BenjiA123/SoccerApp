@@ -4,6 +4,7 @@ const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync')
 
 
+
   exports.getOne = Model =>
 
   catchAsync(async (req,res,next)=>{

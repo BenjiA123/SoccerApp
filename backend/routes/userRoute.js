@@ -9,6 +9,9 @@ userRouter.post("/login", AuthController.login);
 
 // api/users/users-around/100/center/2,3/unit/mi
 userRouter.get('/me',AuthController.protect,UserController.getMe)
+
+userRouter.get('/:username',AuthController.protect,UserController.getOneByUserName)
+
 userRouter.patch('/me',AuthController.protect,UserController.updateMe)
 userRouter.delete('/deleteMe',AuthController.protect,UserController.deleteMe)
 
