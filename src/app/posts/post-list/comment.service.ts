@@ -14,12 +14,10 @@ export class CommentService {
   private postsUpdated = new Subject<{ comment: any }>();
   constructor(private http: HttpClient) { }
   addComment(comment, postId) {
-
     this.commentData ={
       postId,
       comment,
     }
-
     this.http.post(`${BACKEND_URL}`, this.commentData)
       .subscribe(
         (resComment) => {
@@ -31,4 +29,22 @@ export class CommentService {
       )
 
   }
+
+  getCommentsOnOnePost(postId:string){
+    this.http.get(`${BACKEND_URL}/post/${postId}`)
+    .subscribe(
+      (commentData:any)=>{
+
+        console.log(commentData)
+        // this.comments = postData.doc
+        // this.postsUpdated.next([...this.posts])
+      }
+    )
+
+
+  }
+
+
+
+
 }

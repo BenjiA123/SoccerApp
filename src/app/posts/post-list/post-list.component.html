@@ -7,6 +7,13 @@
     <br><br>
     <p>{{post.content}}</p>
     <mat-action-row>
+
+    <button *ngIf="userIsAuthenticated"
+     (click)="getCommentsOnOnePost(post._id)" 
+     mat-stroked-button color="primary" >Comments</button>
+
+
+
         <button mat-button *ngIf="userIsAuthenticated" color="primary"
         (click)="openCommentDialog(post._id)">COMMENT</button>
 
