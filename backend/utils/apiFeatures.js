@@ -7,20 +7,20 @@ class APIFeatures {
 
   filter() {
     const queryObj = { ...this.queryString };
-    console.log(queryObj)
+    // console.log(queryObj)
     // Exclude some so that they are not queried from the database but are used for sorting,filtering, limit and pagination
     const excludedFields = ['page', 'sort', 'fields', 'limit'];
     excludedFields.forEach((el) => delete queryObj[el]);
-    console.log(queryObj)
+    // console.log(queryObj)
     let queryStr = JSON.stringify(queryObj);
-    console.log(queryStr)
+    // console.log(queryStr)
 
     // Replacing some operators in the parameter
     queryStr = queryStr.replace(
       /\b(gte|gt|lte|lt)\b/g,
       (match) => `$${match}`
     );
-    console.log(JSON.parse(queryStr))
+    // console.log(JSON.parse(queryStr))
     this.query = this.query.find(JSON.parse(queryStr));
 
     return this;
@@ -28,7 +28,7 @@ class APIFeatures {
 
   sort() {
     if (this.queryString.sort) {
-      console.log(this.queryString.sort)
+      // console.log(this.queryString.sort)
 
       const sortBy = this.queryString.sort.split(',').join(' ');
       this.query = this.query.sort(sortBy);

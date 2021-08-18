@@ -4,7 +4,7 @@
   top: 4rem;
   left: 30rem;
   position: fixed;
-  background-color: rgb(252, 249, 247);
+  background-color: rgb(255, 253, 251);
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
 }
 
@@ -22,4 +22,31 @@ mat-form-field {
   height: auto;
   padding: 0.1rem 0rem;
   margin: -0.5rem;
+}
+
+@media screen and (max-width: 480px) {
+  .settings_datail_card {
+    height: 29rem;
+    width: 20rem;
+    top: 18rem;
+    left: 2rem;
+    /* visibility: hidden; */
+    position: relative;
+  }
+  .edit_user_btn {
+    height: 3rem;
+    margin-top: 2rem;
+    padding: 0;
+    text-align: center;
+  }
+
+  mat-form-field {
+    width: 100%;
+    height: 0.3rem;
+    /* padding: -7rem; */
+    margin: 1rem 0.5rem 1rem 0rem;
+  }
+  mat-card-title {
+    text-align: center;
+  }
 }

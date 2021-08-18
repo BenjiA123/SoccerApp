@@ -159,3 +159,11 @@ a {
   top: 0;
   transform: rotate(-135deg);
 }
+
+.fab {
+  position: fixed;
+  z-index: 4;
+  top: 1rem;
+  left: 1rem;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+}

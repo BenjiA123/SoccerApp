@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const uniqueValidator = require("mongoose-unique-validator");
 const bcrypt = require('bcryptjs');
+const crypto = require('crypto');
 
 const userSchema = mongoose.Schema({
   email: {
@@ -60,16 +61,26 @@ created_at:{
   type:Date,
   default:Date.now()
 },
+passwordResetToken:String,
+passwordResetExpires:Date,
 
 // Create the location at where the blurt was made.... nahhhhhh
 locationCordinate: [Number],
 })
 
 
-// userSchema.pre(/^findByIdAndUpdate/, function(next){
-//   this.active = true
-//   next()
-// })
+userSchema.methods.createPasswordResetToken = function(){
+  const resetToken = crypto.randomBytes(32).toString('hex')
+
+this.passwordResetToken= crypto
+.createHash('sha256')
+.update(resetToken)
+.digest('hex')
+
+this.passwordResetExpires = Date.now() + 10 *60*1000
+return resetToken
+
+}
 
 
 

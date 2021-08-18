@@ -10,3 +10,14 @@
   position: fixed;
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
 }
+
+@media screen and (max-width: 480px) {
+  .settings_side_bar {
+    width: 17rem;
+    height: 12rem;
+    top: 1rem;
+    left: 2rem;
+    position: fixed;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+  }
+}
