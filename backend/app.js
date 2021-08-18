@@ -21,7 +21,8 @@ app.use(cors());
 
 mongoose
   .connect(
-    "mongodb://localhost:27017/blurt",
+    // "mongodb://localhost:27017/blurt",
+    "mongodb+srv://genzz:bTGUGEVpelaebMkl@cluster0.mcwfq.mongodb.net/FclubHouse?retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {
@@ -34,7 +35,8 @@ mongoose
 app.use(express.urlencoded({extended:true,limit:'10kb'}))
 app.use("/images", express.static(path.join("backend/images")));
 
-app.use("/", express.static(path.join(`${__dirname}`)));
+app.use("/", express.static(path.join(__dirname, "public")));
+
 
 
 app.use((req, res, next) => {

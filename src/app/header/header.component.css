@@ -53,6 +53,7 @@ a {
   position: fixed;
   top: 0;
   left: 0;
+  visibility: hidden;
   opacity: 0;
   width: 0;
   transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -109,6 +110,7 @@ a {
 
 .navigation__checkbox:checked ~ .navigation__nav {
   opacity: 1;
+  visibility: visible;
   width: 100%;
 }
 
@@ -160,10 +162,13 @@ a {
   transform: rotate(-135deg);
 }
 
-.fab {
+.back_btn {
   position: fixed;
-  z-index: 4;
-  top: 1rem;
-  left: 1rem;
+  z-index: 40;
+  top: 0;
+  height: 4rem;
+  width: 4rem;
+  left: 0;
+  color: rgb(0, 4, 255);
   box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
 }

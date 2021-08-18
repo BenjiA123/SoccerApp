@@ -1,7 +1,8 @@
 import { Subscription } from 'rxjs';
 import { AuthService } from './../auth/auth.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,22 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
   constructor(private authService :AuthService, private router:Router) { }
 
+// Create a subject such that when you click,it unchecks
+// Use local
+  isChecked:boolean;
+
+  unCheckFunction(checkbox:any){
+
+    this.isChecked = checkbox.checked
+    console.log(this.isChecked)
+    if(this.isChecked){ this.isChecked = !this.isChecked}
+    else{this.isChecked = true}
+  }
+
+  changeCheckedState(){
+    this.isChecked =!this.isChecked
+
+  }
 
   ngOnInit() {
     this.userIsAuthenticated = this.authService.getIsAuth()

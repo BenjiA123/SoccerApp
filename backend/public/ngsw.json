@@ -1,0 +1,120 @@
+{
+  "configVersion": 1,
+  "timestamp": 1629284970990,
+  "index": "/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/3-es5.76991913a9cc805e186e.js",
+        "/4-es2015.7df774ffee086cccc686.js",
+        "/4-es5.f9ed94c37313cf3a5222.js",
+        "/5-es2015.5a9bad3dd95cc5d0968d.js",
+        "/5-es5.86ac67b03d23f7d6de48.js",
+        "/6-es2015.e9aee1f2c877fc294655.js",
+        "/favicon.ico",
+        "/index.html",
+        "/main-es2015.35e7c7a5dfe1b892740b.js",
+        "/main-es5.b5aa0dc2a07e17ed75f1.js",
+        "/manifest.webmanifest",
+        "/polyfills-es2015.00d63f1353d1c363651c.js",
+        "/polyfills-es5.0834094e2cd1763dd818.js",
+        "/runtime-es2015.2b23facf6942558665f5.js",
+        "/runtime-es5.31e2fb5abb9d930360d5.js",
+        "/styles.8283c3f1bd7fcecc68e1.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/assets/1270-error.json",
+        "/assets/bounce.json",
+        "/assets/chair-dude.json",
+        "/assets/cloud-error.json",
+        "/assets/icons/icon-128x128.png",
+        "/assets/icons/icon-144x144.png",
+        "/assets/icons/icon-152x152.png",
+        "/assets/icons/icon-192x192.png",
+        "/assets/icons/icon-384x384.png",
+        "/assets/icons/icon-512x512.png",
+        "/assets/icons/icon-72x72.png",
+        "/assets/icons/icon-96x96.png",
+        "/assets/line-progress-bar.json",
+        "/assets/scatter.json",
+        "/assets/trail-loading.json"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [
+    {
+      "name": "posts",
+      "patterns": [
+        "https:\\/\\/fonts\\.googleapis\\.com\\/css\\?family=Roboto:300,400,500&display=swap",
+        "https:\\/\\/fonts\\.googleapis\\.com\\/icon\\?family=Material\\+Icons",
+        "http:\\/\\/localhost:3000\\/api\\/posts"
+      ],
+      "strategy": "freshness",
+      "maxSize": 10,
+      "maxAge": 21600000,
+      "timeoutMs": 10000,
+      "version": 1
+    }
+  ],
+  "hashTable": {
+    "/3-es5.76991913a9cc805e186e.js": "cff574d3c4b507f505a48a6d432c62550a600595",
+    "/4-es2015.7df774ffee086cccc686.js": "d9342be4ca06f4c674b318c3b5b4789db46b57ef",
+    "/4-es5.f9ed94c37313cf3a5222.js": "092d81ed8248570b644d23082475fc7f9055b2a5",
+    "/5-es2015.5a9bad3dd95cc5d0968d.js": "d40dcb58abda3bb8a44ef89096b18c968846b615",
+    "/5-es5.86ac67b03d23f7d6de48.js": "7f0816d6fd054b3b402a5547324190ac337f3662",
+    "/6-es2015.e9aee1f2c877fc294655.js": "772a0b4e09aebcd2cd5df1d0d0919403f3594dde",
+    "/assets/1270-error.json": "cce570eb54e8f477402359673286892f8ee4b1f5",
+    "/assets/bounce.json": "be7c29d86cdb4f0c0e0c46b89f40f3862ad0159a",
+    "/assets/chair-dude.json": "fbde3da3b44227a2426bf8f3b6e1db07319d270d",
+    "/assets/cloud-error.json": "d30614f564813d5757955feed09466542bfcf31d",
+    "/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/assets/line-progress-bar.json": "5ae8e02b5498bb49f6afdd3fb05e52a7b6747e24",
+    "/assets/scatter.json": "820d0ab80f8da8351ba5141d44131a8c28d9a90a",
+    "/assets/trail-loading.json": "178e8c5ef8244e1d7913d871cdd3cf15e4be6198",
+    "/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
+    "/index.html": "5b97ab2abcd4cc4dcc2abdec8a00694eae6176ad",
+    "/main-es2015.35e7c7a5dfe1b892740b.js": "5a036dbb4575e6f8ba09d0d8965797ec2ba68d0f",
+    "/main-es5.b5aa0dc2a07e17ed75f1.js": "824fe192dd84c60cfd8e1c6a8c8e987b6d4e847c",
+    "/manifest.webmanifest": "8391b21a3151c29a1f61ffc1c2f4d134fdfbef48",
+    "/polyfills-es2015.00d63f1353d1c363651c.js": "08c97940ba93ccc4121b85df6911d86011ef3fb8",
+    "/polyfills-es5.0834094e2cd1763dd818.js": "9d9b583788005b7e2dc51d2b965f7c09b9180c60",
+    "/runtime-es2015.2b23facf6942558665f5.js": "c47b63a8e0ae8efba50ff15d5755ca5f1a792611",
+    "/runtime-es5.31e2fb5abb9d930360d5.js": "c0114679003df4ebc0aaecc831d30213449b178d",
+    "/styles.8283c3f1bd7fcecc68e1.css": "4fcf817e85d83a59980ec54e955e3d7be5f2a85a"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}

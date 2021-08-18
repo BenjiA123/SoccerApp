@@ -77,7 +77,14 @@ mat-action-row {
   /* background-color: rgb(170, 211, 247); */
 }
 
-@media screen and (max-width: 480px) {
+.posted__by {
+  color: blue;
+  font-size: 0.7rem;
+  font-style: italic;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+@media screen and (max-width: 850px) {
   .side_bar {
     visibility: hidden;
   }
@@ -91,5 +98,24 @@ mat-action-row {
     position: relative;
     left: 0rem;
     width: 80%;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  .post_card {
+    position: relative;
+    left: 0rem;
+    width: 80%;
+  }
+  .comment_reference {
+    font-size: 1rem;
+    font-weight: 100px;
+    font-style: italic;
+  }
+  .comment__btns {
+    /* margin-top: -10rem;
+    position: relative; */
+    bottom: 0.5rem;
+    margin-top: 7rem;
   }
 }

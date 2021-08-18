@@ -1,5 +1,4 @@
 const express = require('express')
-const ImageController = require("../controllers/imageController")
 const ChatController = require("../controllers/chatController")
 const AuthController = require("../controllers/authController")
 const chatRouter = express.Router()

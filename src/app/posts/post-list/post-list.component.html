@@ -9,11 +9,15 @@
     <div class="post-image"  >
         <img [src]="post.imagePath" [alt]="post.title">
     </div>
-    <br><br>
-    <p>{{post.content}}</p>
     <br>
-
-    <mat-action-row>
+    <p>{{post.content}}</p>
+    <div *ngFor="let commentData of comments">
+    <p class="comment_reference"  *ngIf="post._id === commentData.postId" [routerLink]="['/user',commentData.senderId.username]">
+        {{commentData.comment | json}} <span class="posted__by">postedBy</span> @{{commentData.senderId.username | json }}</p>
+    </div>
+<br>
+<br>
+    <mat-action-row class="comment__btns">
 
         <button *ngIf="userIsAuthenticated"
          (click)="getCommentsOnOnePost(post._id)" 
@@ -27,21 +31,12 @@
             
             <button mat-button *ngIf="userIsAuthenticated && userId == post.creator" color="warn"
                 (click)="onDelete(post._id)"><mat-icon>delete</mat-icon></button>
-        </mat-action-row>
-        <br>
-
-    <div *ngFor="let commentData of comments">
-    <p class="comment_reference"  *ngIf="post._id === commentData.postId" [routerLink]="['/user',commentData.senderId.username]">
-        {{commentData.comment | json}} postedBy @{{commentData.senderId.username | json}}</p>
-    </div>
-    
-
-
+        </mat-action-row>   
 
 </mat-card>
 
 
-<mat-card class="side_bar">
+<!-- <mat-card class="side_bar">
     <mat-card-title>USERS</mat-card-title>
   
     <mat-action-row>
@@ -52,13 +47,7 @@
         @{{user?.username}}   <mat-icon>add</mat-icon>   
       </button>
     </mat-action-row>
-
-
-
-
-
-
-</mat-card>
+</mat-card> -->
 
 <button 
 *ngIf="userIsAuthenticated" 
