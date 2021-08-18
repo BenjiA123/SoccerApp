@@ -23,7 +23,11 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
     this.isChecked = checkbox.checked
     console.log(this.isChecked)
-    if(this.isChecked){ this.isChecked = !this.isChecked}
+    if(this.isChecked){
+       this.isChecked = !this.isChecked;
+      //   checkbox.checked = this.isChecked 
+      // console.log(checkbox.checked)
+    }
     else{this.isChecked = true}
   }
 

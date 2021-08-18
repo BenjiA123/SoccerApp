@@ -38,9 +38,11 @@ const createSendToken = (user, statusCode, res) => {
   
   exports.signup = catchAsync(async (req, res, next) => {
 
-    if(!req.body.imagePath) req.body.imagePath= `${req.protocol}://${req.get(
-      'host'
-    )}/images/default.jpg`
+    // if(!req.body.imagePath) req.body.imagePath= `${req.protocol}://${req.get(
+    //   'host'
+    // )}/images/default.jpg`
+
+    req.body.imagePath = "https://firebasestorage.googleapis.com/v0/b/f-clubhouse.appspot.com/o/default.jpg?alt=media&token=24799aba-9374-4a63-8518-d7fc30c99a95"
 
     const newUser = await User.create({
       name: req.body.name,
@@ -48,9 +50,9 @@ const createSendToken = (user, statusCode, res) => {
       clubName:req.body.clubName,
       imagePath:req.body.imagePath,
       email: req.body.email,
-      description:`Hey, my name is ${req.body.name} and I am new to FclubHouse.
+      description:`Hey, my name is ${req.body.name} and .
         I love ${req.body.clubName}
-      It is the Strongest Club`,
+      `,
       locationCordinate:req.body.locationCordinate,
       password: req.body.password,
       passwordConfirm:req.body.passwordConfirm

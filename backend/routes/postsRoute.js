@@ -7,8 +7,8 @@ const postRouter = express.Router()
 postRouter.post('',
 // You can always blurt from anywhere
 AuthController.protect,
-ImageController.uploadUserPhoto,
-ImageController.resizeUserPhoto,
+ImageController.uploadSinglePhoto,
+ImageController.resizePhoto,
 PostController.createPost)
 
 
@@ -18,8 +18,8 @@ postRouter.get('/blurts-around/:distance/center/:latlng/unit/:unit',PostControll
 postRouter.get('', PostController.getPosts)
 postRouter.get("/:id", PostController.getPost)
 postRouter.patch("/:id",AuthController.protect,
-ImageController.uploadUserPhoto,
-ImageController.resizeUserPhoto,
+ImageController.uploadSinglePhoto,
+ImageController.resizePhoto,
  PostController.updatePost)
 postRouter.delete('/:id',AuthController.protect, PostController.deletePost)
 

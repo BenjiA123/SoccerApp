@@ -6,7 +6,7 @@
 <mat-card class="post_card" *ngFor="let post of posts">
     <strong>{{post.title}}</strong>
     <br><br>
-    <div class="post-image"  >
+    <div *ngIf="post.imagePath" class="post-image"  >
         <img [src]="post.imagePath" [alt]="post.title">
     </div>
     <br>

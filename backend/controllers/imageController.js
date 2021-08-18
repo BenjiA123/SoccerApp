@@ -7,7 +7,6 @@ const sharp = require('sharp');
 
 const multerStorage = multer.memoryStorage();
 const multerFilter = (req, file, cb) => {
-  console.log(file.mimetype)
   if (file.mimetype.startsWith('image')) {
     cb(null, true);
   } else {
@@ -21,9 +20,9 @@ const upload = multer({
 });
 
 // // User Configurations for Images
-exports.uploadUserPhoto = upload.single('imagePath');
+exports.uploadSinglePhoto = upload.single('imagePath');
 
-exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
+exports.resizePhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
   req.file.filename = `post-${req.user.id}-${Date.now()}.jpeg`;
   await sharp(req.file.buffer)
@@ -31,6 +30,6 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
     .toFormat('jpeg')
     .jpeg({ quality: 100 })
     .toFile(`images/posts/${req.file.filename}`);
-
+  console.log("Post picture has been updated")
   next();
 });

@@ -46,18 +46,27 @@ exports.updatePost = catchAsync( async(req, res, next) => {
 exports.createPost = catchAsync(async(req,res,next)=>{
 
   // This was what made stored posts on the local computer not to show Online
-  const url = req.protocol + '://' + req.get("host")
+  // /images/posts/"+ req.body.imagePath
 
-  // http://localhost:4000/images/posts/post-5f925c0c2531a71578d1188b-1614482815407.jpeg
+  // http://localhost:4000/public/images/posts/post-5f925c0c2531a71578d1188b-1614482815407.jpeg
 
-  if(req.file) req.body.imagePath = req.file.filename
+  let url
+  if(req.file) 
+  {
+    req.body.imagePath = req.file.filename
+   url = `${req.protocol}://${req.get("host")}/images/posts/${req.body.imagePath}`
 
+  }
+  else{req.body.imagePath = undefined;
+    url = undefined
+    console.log("Triggered")
+     }
   const user = await  User.findOne({_id:req.user._id})
   const userLocation = user.coordinates
   const post = new Post( {
     title:req.body.title,
     content:req.body.content,
-    imagePath:url + "/images/posts/"+ req.body.imagePath,
+    imagePath:url,
     creator :req.user._id,
     // Note, in the future ensure that you make this to change depending on the current location of the individual
     // Now only the location the person gave at registration of the account is used

@@ -37,7 +37,8 @@ export class PostService {
     const postData = new FormData();
     postData.append("title", title);
     postData.append("content", content);
-    postData.append("imagePath", image, title);
+    // You are sending an Image file ,not an imagePath
+    if(image !=null)  postData.append("imagePath", image, title);
     this.http
       .post<{ status: string; data: Post }>(BACKEND_URL, postData)
       .subscribe((responseData) => {
@@ -74,51 +75,6 @@ export class PostService {
       imagePath: string;
       creator: string;
     }>(`${BACKEND_URL}/${id}`);
-  }
-  updatePost(
-    _id: string,
-    title: string,
-    content: string,
-    image: File | string
-  ) {
-    let postData: Post | FormData;
-    if (typeof image == "object") {
-      postData = new FormData();
-      postData.append("_id", _id);
-      postData.append("title", title);
-      postData.append("content", content);
-      postData.append("image", image, title);
-    } else {
-      postData = {
-        _id: _id,
-        title: title,
-        content: content,
-        imagePath: image,
-        creator: null,
-      };
-    }
-    return this.http
-      .put(`${BACKEND_URL}/${_id}`, postData)
-      .subscribe((response) => {
-        // console.log(response)
-        // const updatedPosts = [...this.posts]
-        // const oldPostIndex = updatedPosts.findIndex(p => {
-        //   p._id === _id
-        //   const post :Post = {
-        //     _id:_id,
-        //     title:title,
-        //     content:content,
-        //     imagePath:""
-
-        //   }
-        //   updatedPosts[oldPostIndex] = post
-        //   this.posts = updatedPosts
-        //   this.postsUpdated.next([...this.posts])
-        this.router.navigate(["/"]);
-        // }
-
-        // )
-      });
   }
 
   getRecentUsers(){

@@ -33,9 +33,10 @@ mongoose
   });
   app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({extended:true,limit:'10kb'}))
-app.use("/images", express.static(path.join("backend/images")));
 
-app.use("/", express.static(path.join(__dirname, "public")));
+app.use("", express.static(path.join(__dirname, "public")));
+app.use("/images", express.static(path.join(__dirname, "images")));
+
 
 
 
@@ -51,6 +52,9 @@ app.use((req, res, next) => {
   );
   next();
 });
+
+app.use("images", express.static(path.join(__dirname, "backend/images")));
+
 
 app.use("/api/posts", postRoutes);
 app.use("/api/users", userRoutes);

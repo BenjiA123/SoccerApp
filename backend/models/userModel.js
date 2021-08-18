@@ -49,7 +49,8 @@ role:{
 },
 imagePath:{
     type:String,
-    required:true
+    required:true,
+    default:"https://firebasestorage.googleapis.com/v0/b/f-clubhouse.appspot.com/o/default.jpg?alt=media&token=24799aba-9374-4a63-8518-d7fc30c99a95"
 },
 active:{
   type:Boolean,
