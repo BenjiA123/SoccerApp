@@ -63,7 +63,6 @@ const createSendToken = (user, statusCode, res) => {
 
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-  console.log(email)
 
   if (!email || !password) {
     return next(new AppError("Please Input an email and password"), 400);

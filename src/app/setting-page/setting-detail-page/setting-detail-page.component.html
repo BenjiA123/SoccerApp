@@ -6,7 +6,7 @@
   <mat-card-content>
     <!-- Should contain a form fillled with backend data -->
 <!-- Use [(ngModel)] -->
-    <form (submit)="onUpdateUser(updateUserForm)" #updateUserForm="ngForm" *ngIf="!isLoading">
+    <form (submit)="onUpdateUser(updateUserForm)" #updateUserForm="ngForm" ></form>
       <mat-form-field appearance="outline">
           <input matInput name="email" required placeholder="Email:" #emailInput="ngModel" [ngModel]="currentUserData?.email" type="email">
           <mat-error *ngIf="!emailInput">Please enter a valid email</mat-error>

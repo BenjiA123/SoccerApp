@@ -49,7 +49,7 @@ role:{
 },
 imagePath:{
     type:String,
-    default:"http://localhost:4000/images/default.jpg"
+    required:true
 },
 active:{
   type:Boolean,
