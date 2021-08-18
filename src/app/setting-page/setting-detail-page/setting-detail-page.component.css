@@ -1,0 +1,25 @@
+.settings_datail_card {
+  width: 35rem;
+  height: 30rem;
+  top: 4rem;
+  left: 30rem;
+  position: fixed;
+  background-color: rgb(252, 249, 247);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+}
+
+.settings_datail_card_delete {
+  box-shadow: 0 1rem 3rem rgb(255, 0, 0);
+  height: 10rem;
+}
+mat-form-field {
+  width: 100%;
+  padding: -5.5rem 0rem;
+  margin: -0.5rem;
+}
+.edit_user_btn {
+  width: 100%;
+  height: auto;
+  padding: 0.1rem 0rem;
+  margin: -0.5rem;
+}

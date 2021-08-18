@@ -65,6 +65,15 @@ created_at:{
 locationCordinate: [Number],
 })
 
+
+// userSchema.pre(/^findByIdAndUpdate/, function(next){
+//   this.active = true
+//   next()
+// })
+
+
+
+
 userSchema.pre('save',async function(next){
   this.username = this.username.split(' ').join('').toLowerCase()
   next()

@@ -47,12 +47,15 @@ exports.updateMe = catchAsync(async(req,res,next)=>{
 
       const filteredBody = filterObj(
           req.body,
-           'name',
            'username',
            'name',
            'email',
+           'clubName',
+           'description',
            'imagePath',
            'locationCordinate');
+
+           
 
     const updatedUser = await User.findByIdAndUpdate(
         {_id:req.user._id},
@@ -72,7 +75,7 @@ exports.updateMe = catchAsync(async(req,res,next)=>{
 exports.deleteMe = catchAsync(async(req,res,next)=>{
     await User.findOneAndUpdate({_id:req.user._id},{active:false})
     
-    res.status(200).json({
+    res.status(204).json({
         result:"success",
         data:"You have been deactivated"
     })

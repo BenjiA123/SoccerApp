@@ -1,0 +1,115 @@
+  <mat-card *ngIf="currentRoute == 'edit-profile'"  class="settings_datail_card">
+  <mat-card-header>
+    <mat-card-title>EDIT PROFILE</mat-card-title>
+    <mat-card-subtitle> Change Your Profile</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <!-- Should contain a form fillled with backend data -->
+<!-- Use [(ngModel)] -->
+    <form (submit)="onUpdateUser(updateUserForm)" #updateUserForm="ngForm" *ngIf="!isLoading">
+      <mat-form-field appearance="outline">
+          <input matInput name="email" required placeholder="Email:" #emailInput="ngModel" [ngModel]="currentUserData?.email" type="email">
+          <mat-error *ngIf="!emailInput">Please enter a valid email</mat-error>
+
+      </mat-form-field>
+
+      <!-- UserName -->
+      <mat-form-field appearance="outline">
+        <input matInput name="username" required placeholder="Username:" #usernameInput="ngModel" [ngModel]="currentUserData?.username" type="text">
+        <mat-error *ngIf="!usernameInput">Please enter a valid username</mat-error>
+
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <input matInput name="name" required placeholder="name:" #nameInput="ngModel" [ngModel]="currentUserData?.name" type="text">
+      <mat-error *ngIf="!nameInput">Please enter a valid name</mat-error>
+
+  </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+      <input matInput name="clubName" required placeholder="Favorite Club:" #clubNameInput="ngModel" [ngModel]="currentUserData?.clubName" type="text">
+      <mat-error *ngIf="!clubNameInput">Please enter a valid Club name</mat-error>
+
+  </mat-form-field>
+
+
+  <mat-form-field appearance="outline">
+    <textarea matInput placeholder="Description" name="description" [ngModel]="currentUserData?.description" rows="4"></textarea>
+    <!-- <mat-error *ngIf="form.get('description').invalid">Please enter a post description</mat-error> -->
+</mat-form-field>
+
+
+
+
+
+      <button mat-stroked-button class="edit_user_btn" color="primary" type="submit">
+          <h4><strong>Edit User</strong></h4>
+      </button>
+
+  </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+    </mat-card-content>
+</mat-card>
+
+
+
+<mat-card *ngIf="currentRoute == 'change-theme'"  class="settings_datail_card">
+  <mat-card-header>
+    <mat-card-title>CHANGE THEME</mat-card-title>
+    <mat-card-subtitle>Customise Your User Experience</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content> CONTENT</mat-card-content>
+</mat-card>
+
+
+
+
+<mat-card *ngIf="currentRoute == 'change-password'"  class="settings_datail_card">
+  <mat-card-header>
+    <mat-card-title>Change Password</mat-card-title>
+    <mat-card-subtitle> Change Your Password</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content> CONTENT</mat-card-content>
+</mat-card>
+
+
+
+
+
+
+
+
+  <mat-card *ngIf="currentRoute == 'delete-account'" class="settings_datail_card settings_datail_card_delete">
+    <mat-card-header>
+      <mat-card-title>Delete Account</mat-card-title>
+      <mat-card-subtitle> Delete Your Account</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content> <h1>Are You Sure You Want To Do This</h1>
+
+<br>
+      <mat-action-row>
+  
+        <button 
+        (click)='onDeleteAccount()'
+        mat-button color="warn">
+          DELETE ACCOUNT     <mat-icon>delete</mat-icon>
+      </button>
+        </mat-action-row>
+
+
+    </mat-card-content>
+  </mat-card>

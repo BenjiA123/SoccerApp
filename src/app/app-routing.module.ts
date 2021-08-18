@@ -13,8 +13,8 @@ const appRoutes: Routes = [
 //  Change from lazy loading
   { path: "auth", loadChildren: "./auth/auth-module#AuthModule" }
   ,
-  { path: 'user/:username', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule) },
-  { path: 'settings', loadChildren: () => import('./setting-page/setting-page.module').then(m => m.SettingPageModule) },
+  { path: 'user/:username', loadChildren: () => import('./user-profile/user-profile.module').then(m => m.UserProfileModule) , canActivate: [AuthGuard] },
+  { path: 'settings', loadChildren: () => import('./setting-page/setting-page.module').then(m => m.SettingPageModule) , canActivate: [AuthGuard] },
   { path: "**", redirectTo: "/", pathMatch: "full" },
 ];
 

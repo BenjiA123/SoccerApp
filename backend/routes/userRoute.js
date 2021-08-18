@@ -10,12 +10,14 @@ userRouter.post("/login", AuthController.login);
 userRouter.get('', UserController.getUsers)
 
 // api/users/users-around/100/center/2,3/unit/mi
-userRouter.get('/me',AuthController.protect,UserController.getMe)
+userRouter.route('/me').get(AuthController.protect,UserController.getMe)
+.patch(AuthController.protect,UserController.updateMe)
+.delete(AuthController.protect,UserController.deleteMe)
+
+
 
 userRouter.get('/:username',AuthController.protect,UserController.getOneByUserName)
 
-userRouter.patch('/me',AuthController.protect,UserController.updateMe)
-userRouter.delete('/deleteMe',AuthController.protect,UserController.deleteMe)
 
 userRouter.get('/users-around/:distance/center/:latlng/unit/:unit',AuthController.protect,UserController.getUsersAroundMe)
 

@@ -1,0 +1,12 @@
+/* mat-card {
+  margin-top: 12rem;
+} */
+
+.settings_side_bar {
+  width: 17rem;
+  height: 15rem;
+  top: 4rem;
+  left: 4rem;
+  position: fixed;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+}

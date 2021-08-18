@@ -10,7 +10,3 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   /* background-color: rgb(187, 161, 211);   */
 }
-
-mat-card:first-of-type {
-  margin-top: 12rem;
-}

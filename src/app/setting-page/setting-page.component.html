@@ -1,1 +1,36 @@
-<p>setting-page works!</p>
+<mat-card class="settings_side_bar">
+    <mat-card-header>
+      <mat-card-title>SETTINGS</mat-card-title>
+    </mat-card-header>
+
+    <mat-action-row>
+      <button 
+      routerLink="/settings/edit-profile"
+      mat-button color="primary">
+      EDIT PROFILE     
+    </button>
+<br>
+     <button 
+     routerLink="/settings/change-theme"
+      mat-button color="primary">
+      CHANGE THEME     
+    </button>
+<br>
+    <button 
+    routerLink="/settings/change-password"
+    mat-button color="accent">
+      CHANGE PASSWORD     
+    </button>
+<br>
+      <button 
+      routerLink="/settings/delete-account"
+      mat-button color="warn">
+        DELETE ACCOUNT     <mat-icon>delete</mat-icon>
+    </button>
+      </mat-action-row>
+
+
+  </mat-card>
+  
+  <router-outlet></router-outlet>
+  
