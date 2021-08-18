@@ -12,6 +12,13 @@ const commentRoutes = require("./routes/commentRoute");
 app.use(cors());
 // mongodb+srv://Ben:queen1234@cluster0-rjlm3.mongodb.net/test?retryWrites=true&w=majority
 // mongodb://localhost:27017/posts
+
+// const DB = process.env.DATABASE.replace(
+//   "<PASSWORD>",
+//   process.env.DATABASE_PASSWORD
+// );
+
+
 mongoose
   .connect(
     "mongodb://localhost:27017/blurt",

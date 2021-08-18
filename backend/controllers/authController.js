@@ -37,10 +37,16 @@ const createSendToken = (user, statusCode, res) => {
   };
   
   exports.signup = catchAsync(async (req, res, next) => {
+
+    if(!req.body.imagePath) req.body.imagePath= `${req.protocol}://${req.get(
+      'host'
+    )}/images/default.jpg`
+
     const newUser = await User.create({
       name: req.body.name,
       username: req.body.username,
       clubName:req.body.clubName,
+      imagePath:req.body.imagePath,
       email: req.body.email,
       description:`Hey, my name is ${req.body.name} and I am new to FclubHouse.
         I love ${req.body.clubName}
@@ -57,6 +63,8 @@ const createSendToken = (user, statusCode, res) => {
 
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
+  console.log(email)
+
   if (!email || !password) {
     return next(new AppError("Please Input an email and password"), 400);
   }
@@ -68,7 +76,6 @@ if (!user || !(await user.correctPassword(password, user.password))) {
 }
 
   const token = signToken(user._id);
-  
     // I prevented the password from coming up in the search
     user.password =undefined
     

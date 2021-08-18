@@ -1,7 +1,9 @@
+const dotenv = require('dotenv');
+// Congig nor working
+// dotenv.config({path:'./config.env'})
 const app = require("./app")
 const debug = require("debug")("SchAnonym");
 const http = require("http");
-
 const normalizePort = val => {
   var port = parseInt(val, 10);
 
