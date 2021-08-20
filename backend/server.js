@@ -1,8 +1,21 @@
+
+
+process.on('uncaughtException', (err) => {
+  console.log('UNCAUGHT EXCEPTION  Exiting...');
+  console.log(err.name,err.message,err);
+  process.exit(1);
+});
+
+
+
+
 const app = require("./app")
 const debug = require("debug")("SchAnonym");
 const http = require("http");
 const normalizePort = val => {
   var port = parseInt(val, 10);
+
+ 
 
   if (isNaN(port)) {
     // named pipe
@@ -41,7 +54,7 @@ const onListening = () => {
   debug("Listening on " + bind);
 };
 
-const port = normalizePort(process.env.PORT || "4000");
+const port = normalizePort(process.env.PORT || process.env.PORT);
 app.set("port", port);
 
 const server = http.createServer(app);

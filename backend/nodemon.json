@@ -1,7 +1,7 @@
 {
     "env": {
         "MONGO_ATLAS_PW":"",
-        "JWT_SECRETE":"secret1_is2_a3_secret4_key5_123456",
+        "JWT_SECRET":"secret1_is2_a3_secret4_key5_123456",
         "JWT_EXPIRES":"30d"
 
     }

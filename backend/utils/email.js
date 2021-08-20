@@ -1,13 +1,13 @@
 const nodemailer = require('nodemailer');
-const pug = require('pug');
-const htmlToText = require('html-to-text')
+// const pug = require('pug');
+// const htmlToText = require('html-to-text')
 
 module.exports = class Email{
   constructor(user,url){
     this.to =user.email
     this.firstname = user.name.split(' ')[0]
     this.url= url
-    this.from = `"Teck Team" <${process.env.EMAIL_FORM}>`
+    this.from = `"Football Club Hpuse Team" <${process.env.EMAIL_FROM}>`
   }
 
   newTransport(){
@@ -24,29 +24,30 @@ module.exports = class Email{
     }
 
     return nodemailer.createTransport({
-      host: 'smtp.mailtrap.io',
-      port: 25,
+      host: process.env.EMAIL_HOST,
+      port:process.env.EMAIL_PORT,
       auth: {
-        user: '40c302ca9ec2c5',
-        pass: '47e2e62ef6be09',
+        user: process.env.EMAIL_USERNAME,
+        pass: process.env.EMAIL_PASSWORD,
       },
     });
   }
 
   async send(template,subject){
-    const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`,
-    {
-      firstName:this.firstname,
-      url:this.url,
-      subject
-    })
+    // Render with Angular
+    // const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`,
+    // {
+    //   firstName:this.firstname,
+    //   url:this.url,
+    //   subject
+    // })
 
     const  mailOptions = {
       from: this.from,
       to:this.to,
       subject,
-      html,
-      text:htmlToText.fromString(html)
+      // html,
+      // text:htmlToText.fromString(html)
   };
   
   this.newTransport().sendMail(mailOptions)

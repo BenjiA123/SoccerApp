@@ -10,14 +10,19 @@
 
 <form (submit)="onSavePost()" [formGroup]="form" *ngIf="!isLoading">
 
-    <div align=center style="text-align:center">
-        <button mat-stroked-button (click)="filePicker.click()" color="primary" type="button" class="upload">Upload
+    <div *ngIf="withPic" align=center style="text-align:center">
+        <button mat-stroked-button (click)="filePicker.click()" color="primary" class="upload">Picture
             Pic</button>
         <input #filePicker (change)="onImagePicked($event)" type="file">
     </div>
 
-    <mat-form-field appearance="outline">
-        <input matInput formControlName="title" placeholder="Post Caption" type="text">
+    <button mat-stroked-button color="primary" (click)="withPicture()" >With Picture</button>
+    <button mat-stroked-button color="primary" (click)="withNoPicture()" >Without Picture</button>
+
+
+
+    <mat-form-field  appearance="outline">
+        <input  matInput formControlName="title" placeholder="Post Caption" type="text">
         <mat-error *ngIf="form.get('title').invalid">Please enter a post Caption</mat-error>
 
     </mat-form-field>

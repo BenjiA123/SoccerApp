@@ -35,6 +35,15 @@ export class PostCreateComponent implements OnInit {
   form: FormGroup
   imagePreview;
 
+  withPic:boolean = false;
+
+  withPicture(){
+    this.withPic = true
+  }
+  withNoPicture(){
+    this.withPic = false
+  }
+
   post: Post
   onSavePost() {
     if (this.form.invalid) {

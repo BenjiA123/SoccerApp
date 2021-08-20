@@ -24,8 +24,6 @@ button {
   width: 100%;
 }
 .upload {
-  background-image: url("http://localhost:4000/images/posts/post-5f925c0c2531a71578d1188b-1614482815407.jpeg");
-  left: 25%;
   border-radius: 50%;
   width: auto;
   height: auto;

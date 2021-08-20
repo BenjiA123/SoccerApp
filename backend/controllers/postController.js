@@ -54,6 +54,7 @@ exports.createPost = catchAsync(async(req,res,next)=>{
   if(req.file) 
   {
     req.body.imagePath = req.file.filename
+    // Change this url to your firebase storage
    url = `${req.protocol}://${req.get("host")}/images/posts/${req.body.imagePath}`
 
   }

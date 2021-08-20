@@ -1,6 +1,14 @@
 const path = require("path");
 const express = require("express");
+
+// ENV VARIABLE CRRORS
+const dotenv = require('dotenv');
+dotenv.config({ path: path.join(__dirname, "config.env") });
+
+
+
 const app = express();
+
 const mongoose = require("mongoose");
 var cors = require("cors");
 const AppError = require('./utils/appError')
@@ -10,19 +18,18 @@ const chatRoutes = require("./routes/chatRoute");
 const postRoutes = require("./routes/postsRoute");
 const commentRoutes = require("./routes/commentRoute");
 app.use(cors());
-// mongodb+srv://Ben:queen1234@cluster0-rjlm3.mongodb.net/test?retryWrites=true&w=majority
-// mongodb://localhost:27017/posts
 
-// const DB = process.env.DATABASE.replace(
-//   "<PASSWORD>",
-//   process.env.DATABASE_PASSWORD
-// );
+const DB = process.env.DATABASE.replace(
+  "<PASSWORD>",
+  process.env.DATABASE_PASSWORD
+);
 
-
+console.log(process.env.JWT_EXPIRES_IN)
 mongoose
   .connect(
-    // "mongodb://localhost:27017/blurt",
-    "mongodb+srv://genzz:bTGUGEVpelaebMkl@cluster0.mcwfq.mongodb.net/FclubHouse?retryWrites=true&w=majority",
+    // Change on production
+    "mongodb://localhost:27017/blurt",
+    // DB,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {
