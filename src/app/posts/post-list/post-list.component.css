@@ -81,7 +81,25 @@ mat-action-row {
   color: blue;
   font-size: 0.7rem;
   font-style: italic;
+  cursor: pointer;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.created_at_span {
+  color: blue;
+  font-size: 0.7rem;
+  font-style: italic;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  float: right;
+}
+
+.post_username {
+  cursor: pointer;
+  color: red;
+  font-size: 0.7rem;
+  font-style: italic;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  float: right;
 }
 
 @media screen and (max-width: 850px) {

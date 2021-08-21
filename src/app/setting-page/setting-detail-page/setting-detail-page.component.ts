@@ -35,6 +35,27 @@ export class SettingDetailPageComponent implements OnInit {
 
   }
 
+  updatePassword(passwordForm:NgForm){
+
+    if (passwordForm.invalid) {
+      return
+    }
+    const passwordData :any = {
+
+      currentPassword:passwordForm.value.currentPassword,
+         password:passwordForm.value.password,
+         passwordConfirm:passwordForm.value.passwordConfirm,
+
+    }
+
+    this.settingsService.updateMyPassword(passwordData).subscribe(
+      ()=>{
+        console.log("Updated Successfully")
+        
+      }
+    )
+
+  }
 
 
   onUpdateUser(form: NgForm) {

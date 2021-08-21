@@ -115,6 +115,7 @@ userSchema.pre('save', async function (next) {
     next()
   })
 
+ 
 
   // For logging in checks if passwords are the same
   userSchema.methods.correctPassword = async function (candidatePassword, userPassword) {

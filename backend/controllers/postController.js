@@ -45,29 +45,16 @@ exports.updatePost = catchAsync( async(req, res, next) => {
 
 exports.createPost = catchAsync(async(req,res,next)=>{
 
-  // This was what made stored posts on the local computer not to show Online
-  // /images/posts/"+ req.body.imagePath
-
-  // http://localhost:4000/public/images/posts/post-5f925c0c2531a71578d1188b-1614482815407.jpeg
-
   let url
-  if(req.file) 
-  {
-    req.body.imagePath = req.file.filename
-    // Change this url to your firebase storage
-   url = `${req.protocol}://${req.get("host")}/images/posts/${req.body.imagePath}`
+  if(!req.file)  req.file.filename =undefined
 
-  }
-  else{req.body.imagePath = undefined;
-    url = undefined
-    console.log("Triggered")
-     }
+  
   const user = await  User.findOne({_id:req.user._id})
   const userLocation = user.coordinates
   const post = new Post( {
     title:req.body.title,
     content:req.body.content,
-    imagePath:url,
+    imagePath:req.file.filename,
     creator :req.user._id,
     // Note, in the future ensure that you make this to change depending on the current location of the individual
     // Now only the location the person gave at registration of the account is used
@@ -98,3 +85,19 @@ exports.deletePost = catchAsync(async (req, res, next) => {
 exports.getBlurtAround = factory.getDataAroundMe(Post)
 
 
+
+// Get all Posts By a Particular User ID
+// one-users-posts/:userId
+exports.getAllPostsByUser = catchAsync(async(req,res,next)=>{
+  // Get user ID
+  const userId = await User.findById(req.params.userId)
+console.log(userId._id)
+// Creator Id should not be populated
+  const posts =  await Post.find({creator:userId._id},{active:true})
+  .select('title content creator created_at imagePath locationCoordinate username')
+  // console.log(posts)
+  res.status(200).json({
+      result:"success",
+      data:posts
+  })
+  })

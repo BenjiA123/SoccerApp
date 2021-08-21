@@ -62,6 +62,7 @@ export class PostListComponent implements OnDestroy, OnInit {
     this.postsSub = this.postService.getPostUpdateListener()
       .subscribe((posts:Post[])=>{
         this.posts = posts
+        console.log(this.posts)
       });
 
   //  Listening to changes in comments for subject

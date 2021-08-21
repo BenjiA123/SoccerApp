@@ -70,9 +70,9 @@
 <mat-card *ngIf="currentRoute == 'change-theme'"  class="settings_datail_card">
   <mat-card-header>
     <mat-card-title>CHANGE THEME</mat-card-title>
-    <mat-card-subtitle>Customise Your User Experience</mat-card-subtitle>
+    <mat-card-subtitle>Change Theme</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content> CONTENT</mat-card-content>
+  <mat-card-content> COMMING SOON</mat-card-content>
 </mat-card>
 
 
@@ -83,7 +83,45 @@
     <mat-card-title>Change Password</mat-card-title>
     <mat-card-subtitle> Change Your Password</mat-card-subtitle>
   </mat-card-header>
-  <mat-card-content> CONTENT</mat-card-content>
+  <mat-card-content> 
+    
+    <form (click)="updatePassword(updateUserPassword)" #updateUserPassword="ngForm" >
+
+
+
+      <mat-form-field appearance="outline">
+        <input matInput name="currentPassword" required placeholder="Current Password:" #currentPasswordInput="ngModel" ngModel type="password">
+        <mat-error *ngIf="!currentPassword">Please enter a valid password</mat-error>
+  
+    </mat-form-field>
+
+
+
+      
+    <mat-form-field appearance="outline">
+      <input matInput name="password" required placeholder="Password:" #passwordInput="ngModel" ngModel type="password">
+      <mat-error *ngIf="!password">Please enter a valid password</mat-error>
+
+  </mat-form-field>
+
+
+    <mat-form-field appearance="outline">
+      <input matInput name="passwordConfirm" required placeholder="Password Confirm:" #passwordConfirmInput="ngModel" ngModel type="password">
+      <mat-error *ngIf="!passwordConfirm">Please enter a valid PassWord Confirm</mat-error>
+
+  </mat-form-field>
+
+  <button mat-stroked-button class="edit_user_btn" color="primary" type="submit">
+    Change Password
+</button>
+
+
+
+    </form>
+
+
+
+  </mat-card-content>
 </mat-card>
 
 

@@ -18,6 +18,7 @@ userRouter.route('/me').get(AuthController.protect,UserController.getMe)
 .delete(AuthController.protect,UserController.deleteMe)
 
 
+userRouter.patch('/update-my-password',AuthController.protect,AuthController.updatePassword)
 
 userRouter.get('/:username',AuthController.protect,UserController.getOneByUserName)
 

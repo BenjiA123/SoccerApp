@@ -105,3 +105,22 @@ exports.filterFunction = (Model)=>
       doc,
     });
   });
+
+
+  // exports.userFilterFunction = (Model)=>
+  //   catchAsync(async(req,res,next)=>{
+  //     let filterObj = {}
+  //     if(req.params.postId) filterObj = {postId:req.params.postId}
+  //     else if(req.params.senderId) filterObj = {senderId:req.params.senderId}
+  //     else if(req.params.postId && req.params.senderId) filterObj = {postId:req.params.postId, senderId:req.params.senderId}
+
+    
+  //       const doc = await Model.find(filterObj)
+        
+  //       res.status(200).json({
+  //           status:"success",
+  //           result:doc.length,
+  //           doc
+            
+  //       })
+  //   })

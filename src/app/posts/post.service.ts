@@ -17,7 +17,7 @@ export class PostService {
   getPosts() {
 
     // Set this.posts to something
-   this.http.get(BACKEND_URL)
+   this.http.get(`${BACKEND_URL}`)
    .subscribe(
     (postData:any)=>{
       this.posts = postData.doc

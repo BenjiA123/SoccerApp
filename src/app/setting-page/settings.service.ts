@@ -11,6 +11,13 @@ export class SettingsService {
 
   constructor(private http :HttpClient) { }
 
+
+  updateMyPassword(passwordInfo:any){
+    return  this.http.patch(`${BACKEND_URL}/update-my-password`,passwordInfo)
+  
+    }
+
+
   updateMe(newInfo:any){
   return  this.http.patch(`${BACKEND_URL}/me`,newInfo)
 

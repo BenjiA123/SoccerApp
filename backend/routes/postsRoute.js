@@ -8,8 +8,10 @@ postRouter.post('',
 // You can always blurt from anywhere
 AuthController.protect,
 ImageController.uploadSinglePhoto,
-ImageController.resizePhoto,
+ImageController.firebaseUpload,
 PostController.createPost)
+
+postRouter.get('/one-users-posts/:userId',PostController.getAllPostsByUser)
 
 
 postRouter.get('/blurts-around/:distance/center/:latlng/unit/:unit',PostController.getBlurtAround)
@@ -19,7 +21,7 @@ postRouter.get('', PostController.getPosts)
 postRouter.get("/:id", PostController.getPost)
 postRouter.patch("/:id",AuthController.protect,
 ImageController.uploadSinglePhoto,
-ImageController.resizePhoto,
+ImageController.firebaseUpload,
  PostController.updatePost)
 postRouter.delete('/:id',AuthController.protect, PostController.deletePost)
 

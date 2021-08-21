@@ -9,3 +9,143 @@
   background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
   background-size: cover;
 }
+
+:host {
+  display: block;
+  margin-top: 1rem;
+}
+.info-text {
+  text-align: center;
+}
+mat-spinner {
+  margin: auto;
+}
+.post-image {
+  width: 100%;
+}
+mat-paginator {
+  margin-top: 1rem;
+  border-radius: 1%;
+}
+.post-image img {
+  width: 100%;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  font-size: 7rem;
+}
+
+.fab {
+  position: fixed;
+  z-index: 4;
+  bottom: 1rem;
+  right: 1rem;
+}
+mat-card {
+  margin: auto;
+  margin-top: 3rem;
+}
+mat-card:first-of-type {
+  margin-top: 6rem;
+}
+
+mat-action-row {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+.post_card {
+  width: 70%;
+  left: -9rem;
+}
+.side_bar {
+  right: -2rem;
+  height: 30rem;
+  top: 3rem;
+  width: 30%;
+  position: fixed;
+  background-color: rgb(255, 255, 255);
+  z-index: 3s;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.side_nav_header {
+  text-align: center;
+}
+.side_bar_user_element {
+  border-style: solid;
+  height: 6.5%;
+  width: 100%;
+  left: -2rem;
+  border-radius: 4px;
+  text-align: left;
+  position: relative;
+  padding: 0.05rem 0.07rem;
+  padding-bottom: -10rem;
+  margin: 1rem;
+  margin-bottom: -0.95rem;
+  cursor: pointer;
+  /* background-color: rgb(170, 211, 247); */
+}
+
+.posted__by {
+  color: blue;
+  font-size: 0.7rem;
+  font-style: italic;
+  cursor: pointer;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.created_at_span {
+  color: blue;
+  font-size: 0.7rem;
+  font-style: italic;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  float: right;
+}
+
+.post_username {
+  cursor: pointer;
+  color: red;
+  font-size: 0.7rem;
+  font-style: italic;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  float: right;
+}
+
+@media screen and (max-width: 850px) {
+  .side_bar {
+    visibility: hidden;
+  }
+
+  /* mat-card {
+    margin: auto;
+    width: 70%;
+    margin-top: 3rem;
+  } */
+  .post_card {
+    position: relative;
+    left: 0rem;
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 365px) {
+  .post_card {
+    position: relative;
+    left: 0rem;
+    width: 80%;
+  }
+  .comment_reference {
+    font-size: 1rem;
+    font-weight: 100px;
+    font-style: italic;
+  }
+  .comment__btns {
+    /* margin-top: -10rem;
+    position: relative; */
+    bottom: 0.5rem;
+    margin-top: 7rem;
+  }
+}

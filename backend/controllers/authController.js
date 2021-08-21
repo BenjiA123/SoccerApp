@@ -241,7 +241,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
     return next(new AppError('You are not a registered User', 400));
   }
   // Check if Posted password is correct
-  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+  if (!(await user.correctPassword(req.body.currentPassword, user.password))) {
     return next(new AppError('Your current password is wrong', 401));
   }
   // If so update App

@@ -4,7 +4,6 @@ const postSchema = mongoose.Schema({
     content: {type:String,required:true},
     imagePath: {type:String,required:false},
     locationCoordinate:{type:[Number],required:false,},
-    comment:{type:[String],required:false},
     created_at:{type:Date,default:Date.now()},
     creator:{type:mongoose.Schema.Types.ObjectId,ref:"User",required:true}
 });
@@ -15,7 +14,11 @@ const postSchema = mongoose.Schema({
 //     console.log(User)
 //     next();
 //   });
-
+postSchema.pre(/^find/, function(next){
+    this.populate('creator')
+    // Select only username
+    next()
+})
 
 module.exports = mongoose.model('Post',postSchema);
 

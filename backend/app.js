@@ -1,11 +1,8 @@
 const path = require("path");
 const express = require("express");
 
-// ENV VARIABLE CRRORS
 const dotenv = require('dotenv');
 dotenv.config({ path: path.join(__dirname, "config.env") });
-
-
 
 const app = express();
 
@@ -17,6 +14,10 @@ const userRoutes = require("./routes/userRoute");
 const chatRoutes = require("./routes/chatRoute");
 const postRoutes = require("./routes/postsRoute");
 const commentRoutes = require("./routes/commentRoute");
+
+
+
+
 app.use(cors());
 
 const DB = process.env.DATABASE.replace(
