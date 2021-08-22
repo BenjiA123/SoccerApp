@@ -17,22 +17,11 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
 // Create a subject such that when you click,it unchecks
 // Use local
-  isChecked:boolean;
+  isChecked:boolean = false;
 
-  unCheckFunction(checkbox:any){
-
-    this.isChecked = checkbox.checked
-    console.log(this.isChecked)
-    if(this.isChecked){
-       this.isChecked = !this.isChecked;
-      //   checkbox.checked = this.isChecked 
-      // console.log(checkbox.checked)
-    }
-    else{this.isChecked = true}
-  }
-
-  changeCheckedState(){
-    this.isChecked =!this.isChecked
+  changeCheckedState(checkbox:any){
+    console.log(checkbox.checked)
+    checkbox.checked=!checkbox.checked
 
   }
 

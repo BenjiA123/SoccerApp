@@ -1,11 +1,11 @@
 <div class="navigation">
-    <input type="checkbox" (click)="unCheckFunction(checkbox)" #checkbox class="navigation__checkbox" id="navi-toggle" />
+    <input type="checkbox" #checkbox class="navigation__checkbox" id="navi-toggle" />
     <label for="navi-toggle" class="navigation__button"
       ><span class="navigation__icon">&nbsp;</span></label
     >
     <div  *ngIf="!isChecked" class="navigation__background">&nbsp;</div>
-    <nav *ngIf="!isChecked" class="navigation__nav">
-      <ul (click)="changeCheckedState()" class="navigation__list">
+    <nav (click)="changeCheckedState(checkbox)" *ngIf="!isChecked" class="navigation__nav">
+      <ul class="navigation__list">
         <li class="navigation__item">
           <a  routerLink="/posts" class="navigation__link">Posts</a>
         </li>
