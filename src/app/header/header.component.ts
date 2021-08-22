@@ -20,9 +20,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
   isChecked:boolean = false;
 
   changeCheckedState(checkbox:any){
-    console.log(checkbox.checked)
     checkbox.checked=!checkbox.checked
-
   }
 
   ngOnInit() {
