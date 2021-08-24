@@ -54,32 +54,37 @@ imagePath:{
 },
 active:{
   type:Boolean,
-  required:false,
-  default:true
+  default:false,
+  required:true,
 
 },
 created_at:{
   type:Date,
   default:Date.now()
 },
-passwordResetToken:String,
-passwordResetExpires:Date,
+status: {
+  type: String, 
+  enum: ['Pending', 'Active'],
+  default: 'Pending'
+},
+token:String,
+tokenExpires:Date,
 
 // Create the location at where the blurt was made.... nahhhhhh
 locationCordinate: [Number],
 })
 
 
-userSchema.methods.createPasswordResetToken = function(){
-  const resetToken = crypto.randomBytes(32).toString('hex')
+userSchema.methods.createToken = function(){
+  const token = crypto.randomBytes(32).toString('hex')
 
-this.passwordResetToken= crypto
+this.token= crypto
 .createHash('sha256')
-.update(resetToken)
+.update(token)
 .digest('hex')
 
-this.passwordResetExpires = Date.now() + 10 *60*1000
-return resetToken
+this.tokenExpires = Date.now() + 10 *60*1000
+return token
 
 }
 
@@ -109,13 +114,7 @@ userSchema.pre('save', async function (next) {
   });
 
 
-  // Prevents inactive users from showing in the search
-  userSchema.pre(/^find/, function(next){
-    this.find({active:{$ne:false}})
-    next()
-  })
 
- 
 
   // For logging in checks if passwords are the same
   userSchema.methods.correctPassword = async function (candidatePassword, userPassword) {

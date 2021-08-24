@@ -9,7 +9,8 @@ import {
     MatPaginatorModule,
     MatDialogModule,
     MatSliderModule,
-    MatIconModule
+    MatIconModule,
+    MatMenuModule
 }
     from '@angular/material'
 
@@ -27,6 +28,7 @@ import {
         MatPaginatorModule,
         MatExpansionModule,
         MatProgressSpinnerModule,
+        MatMenuModule,
         MatIconModule
     ]
 })

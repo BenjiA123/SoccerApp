@@ -10,4 +10,23 @@ button {
 }
 mat-card {
   margin: auto;
+  height: 80%;
+}
+
+.forgot_password {
+  color: blue;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 100;
+  width: 8rem;
+  float: right;
+}
+
+.sign_up {
+  color: blue;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 100;
+  width: 8rem;
+  float: left;
 }

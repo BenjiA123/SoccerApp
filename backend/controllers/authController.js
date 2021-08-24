@@ -3,7 +3,9 @@ const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 const crypto = require('crypto')
 const User = require("../models/userModel");
-const sendEmail = require("../utils/email")
+const Email = require('../utils/email')
+
+
 
 const jwt = require("jsonwebtoken");
 
@@ -37,14 +39,13 @@ const createSendToken = (user, statusCode, res) => {
       },
     });
   };
+
+ 
   
-  exports.signup = catchAsync(async (req, res, next) => {
+  exports.verifyMail = catchAsync(async (req, res, next) => {
 
-    // if(!req.body.imagePath) req.body.imagePath= `${req.protocol}://${req.get(
-    //   'host'
-    // )}/images/default.jpg`
-
-    req.body.imagePath = "https://firebasestorage.googleapis.com/v0/b/f-clubhouse.appspot.com/o/default.jpg?alt=media&token=24799aba-9374-4a63-8518-d7fc30c99a95"
+    req.body.imagePath = 
+    "https://firebasestorage.googleapis.com/v0/b/f-clubhouse.appspot.com/o/default.jpg?alt=media&token=24799aba-9374-4a63-8518-d7fc30c99a95"
 
     const newUser = await User.create({
       name: req.body.name,
@@ -52,21 +53,76 @@ const createSendToken = (user, statusCode, res) => {
       clubName:req.body.clubName,
       imagePath:req.body.imagePath,
       email: req.body.email,
+      active:false,
       description:`Hey, my name is ${req.body.name} and .
         I love ${req.body.clubName}
       `,
       locationCordinate:req.body.locationCordinate,
-      password: req.body.password,
+      password: req.body.password, //It WORKED....... WHY
       passwordConfirm:req.body.passwordConfirm
     });
+
+  const resetToken = newUser.createToken(); 
+
+    try{ 
+    const resetUrl = `${req.protocol}://${req.get('host')}/api/verify-email/${resetToken}`
+
+
+console.log(newUser) //
+    const email = await new Email(newUser,resetUrl)
+    email.sendWelcome()
+
+  res.status(200).json({ 
+    status:"success",
+    message:"Token sent to email"
+  })
+  }
+  catch (error) {
+      console.log(error);
+      user.token = undefined;
+      await user.save({ validateBeforeSave: false });
+      return next(
+        new AppError('Their was an error sending this verification email. Try again later', 500)
+      );
+  }
+
   
-    createSendToken(newUser, 201, res);
+
+
   });
+
+  exports.signup = catchAsync(async (req,res,next)=>{
+    const hashedToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
+
+    const user = await User.findOne({
+      token: hashedToken,
+      tokenExpires:{ $gt: Date.now() },
+    });
+    // Check if there is a user
+    if (!user) {
+      return next(new AppError('Token is Invalid or has expired', 400));
+    }
+    user.token = undefined;
+    user.tokenExpires=undefined
+  
+    await user.save();
+  
+    // Log user in with JWT
+    createSendToken(user, 200, res);
+  })
+
+
+
+
+
+
 
 
 
 exports.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
+
+  
 
   if (!email || !password) {
     return next(new AppError("Please Input an email and password"), 400);
@@ -74,8 +130,18 @@ exports.login = catchAsync(async (req, res, next) => {
 
   const user = await User.findOne({ email: email }).select("+password");
 
+  if(user.active == false) return next(new AppError("This users accout has been deleted by the user",400))
+
 if (!user || !(await user.correctPassword(password, user.password))) {
+
+
   return next(new AppError('Incorrect email or password', 401));
+}
+
+if (user.status != "Active") {
+  return res.status(401).send({
+    message: `Pending Account.\n An emaul has been sent to${user.email} Please Verify Your Email!`,
+  });
 }
 
   const token = signToken(user._id);
@@ -134,32 +200,25 @@ exports.restrictTo = (...roles) => {
 
 
 
+
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   // Get user based on posted email
   const user = await User.findOne({
     email: req.body.email,
   });
-
+  console.log(user)
   if (!user) return next(new AppError('No user exists with this email ', 404));
 
   // Generates Random reset token
-  const resetToken = user.createPasswordResetToken();
+  const resetToken = user.createToken();
   await user.save({ validateBeforeSave: false });
   // Send it to users email
   
-  const resetUrl = `${req.protocol}://${req.get('host')}/api/reset-passworrd/${resetToken}`
-
-  const message = `Forgot your password, submit a tour new Password and Password confirm to ${resetUrl}
-  \n Please dont respond if you didt request this`
-
-  try{
   
-  await sendEmail({
-    email:user.email,
-    subject:"Your password Reset Token (Only valid for 10min)",
-    message
-  })
-
+ 
+  try{
+    const resetUrl = `${req.protocol}://${req.get('host')}/api/reset-passworrd/${resetToken}`
+    await new Email(user,resetUrl).sendPasswordReset()
   res.status(200).json({
     status:"success",
     message:"Token send to email"
@@ -167,41 +226,23 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   }
   catch (error) {
       console.log(error);
-      user.passwordResetToken = undefined;
-      user.passwordResetExpires = undefined;
+      user.token = undefined;
+      user.tokenExpires = undefined;
       await user.save({ validateBeforeSave: false });
       return next(
         new AppError('Their was an error sending this email. Try again later', 500)
       );
   }
-  // try {
-  //   const resetURL = `${req.protocol}://${req.get(
-  //     'host'
-  //   )}/api/users/reset-password/${resetToken}`;
-  //   await new Email(user,resetURL).sendPasswordReset()
-
-  //   res.status(200).json({
-  //     status: 'Success',
-  //     message: 'Token sent to email',
-  //   });
-  // } catch (error) {
-  //   console.log(error);
-  //   user.passwordResetToken = undefined;
-  //   user.passwordResetExpires = undefined;
-  //   await user.save({ validateBeforeSave: false });
-  //   return next(
-  //     new AppError('Their was an error sending this email. Try again later', 500)
-  //   );
-  // }
+ 
 });
 
 exports.resetPassword = catchAsync(async (req, res, next) => {
   // Get user based on token and compare token to see if it has expired
-  const hashedToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
+  const hashedToken = crypto.createHash('sha256').update(req.params.resetToken).digest('hex');
 
   const user = await User.findOne({
-    passwordResetToken: hashedToken,
-    passwordResetExpires: { $gt: Date.now() },
+    token: hashedToken,
+    tokenExpires: { $gt: Date.now() },
   });
   // Check if there is a user
   if (!user) {
@@ -210,8 +251,8 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   // Change Password
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
-  user.passwordResetToken = undefined;
-  user.passwordResetExpires = undefined;
+  user.token = undefined;
+  user.tokenExpires = undefined;
 
   await user.save();
 

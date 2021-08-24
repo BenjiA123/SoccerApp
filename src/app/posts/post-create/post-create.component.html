@@ -11,13 +11,13 @@
 <form (submit)="onSavePost()" [formGroup]="form" *ngIf="!isLoading">
 
     <div *ngIf="withPic" align=center style="text-align:center">
-        <button mat-stroked-button (click)="filePicker.click()" color="primary" class="upload">Picture
-            Pic</button>
+        <a mat-stroked-button (click)="filePicker.click()" color="primary" class="upload">Picture
+            Pic</a>
         <input #filePicker (change)="onImagePicked($event)" type="file">
     </div>
 
-    <button mat-stroked-button color="primary" (click)="withPicture()" >With Picture</button>
-    <button mat-stroked-button color="primary" (click)="withNoPicture()" >Without Picture</button>
+    <a mat-stroked-button color="primary" (click)="withPicture()" >With Picture</a>
+    <a mat-stroked-button color="primary" (click)="withNoPicture()" >Without Picture</a>
 
 
 

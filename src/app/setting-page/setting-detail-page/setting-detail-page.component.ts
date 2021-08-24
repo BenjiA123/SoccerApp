@@ -22,7 +22,6 @@ export class SettingDetailPageComponent implements OnInit {
     .subscribe(
       (params:Params)=>{
         this.currentRoute = params['detail']
-        console.log(this.currentRoute)
       }
     )
     this.authService.getCurrentUserProfile()
@@ -74,7 +73,7 @@ export class SettingDetailPageComponent implements OnInit {
 
       this.settingsService.updateMe(updatedData)
       .subscribe((updatedResult)=>{
-        console.log(updatedResult)
+        console.log("Updated" )
       })
     // For now you cant log in with username 
     // this.authService.login(form.value.email, form.value.password, null,null,null,null)
@@ -86,6 +85,9 @@ export class SettingDetailPageComponent implements OnInit {
     this.settingsService.deactivateMe()
     .subscribe(
       (res)=>{
+        // 
+        // Delte all inactive user post
+
         this.authService.logout()
       }
     )

@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   hide = true
   isLoading = false
   lottie
+  private loadingSub:Subscription
   private authStatusSub: Subscription
   lottieSpinner: { path: string; renderer: string; autoplay: boolean; loop: boolean; };
   constructor(public authService: AuthService) {
@@ -30,6 +31,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.loadingSub = this.authService.getLoadingState().subscribe(
+      loadingState =>{
+        this.isLoading = loadingState
+      }
+    )
     this.authStatusSub = this.authService.getauthStatusListener().subscribe(
       authStatus => {
         if(authStatus) this.isLoading = false
@@ -40,6 +46,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     // Subscription give you a place to store your subscription so you can unsubscribe to revent lose data
     this.authStatusSub.unsubscribe()
+    this.loadingSub.unsubscribe()
+
   }
   onLogin(form: NgForm) {
     this.isLoading = true

@@ -9,7 +9,7 @@ postRouter.post('',
 AuthController.protect,
 ImageController.uploadSinglePhoto,
 ImageController.firebaseUpload,
-PostController.createPost)
+)
 
 postRouter.get('/one-users-posts/:userId',PostController.getAllPostsByUser)
 

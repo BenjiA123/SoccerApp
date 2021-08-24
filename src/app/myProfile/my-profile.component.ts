@@ -20,18 +20,15 @@ posts
 
    this.authService.getCurrentUserProfile().subscribe(res =>{
     this.myInfo = res.data
-    console.log("JESUS")
 
+    this.myProfileService.postsByCurrentUser(this.myInfo._id)
+    .subscribe(
+      (posts:any)=>{
+        this.posts = posts.data
+      }
+    )
    })
 
-   console.log("JESUS")
-   this.myProfileService.postsByUser()
-   .subscribe(
-     (posts:any)=>{
-       this.posts = posts.data
-       console.log(this.posts)
-     }
-   )
    
 
 

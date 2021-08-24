@@ -15,9 +15,20 @@ export class AuthService {
   private isAuthenticated = false
   // The value of the boolean subject is changed by next()
   private authStatusListener = new BehaviorSubject<boolean>(false)
+  private loadingState = new BehaviorSubject<boolean>(false)
   private tokenTimer: any
   private userId: string
   constructor(private http: HttpClient, private router: Router) { }
+
+
+// /users/forgot-password
+  forgotPassword(email:any){
+  return  this.http.post(`${BACKEND_URL}/forgot-password`,email)
+  }
+
+
+
+
 
 
   getCurrentUserProfile(){
@@ -54,6 +65,9 @@ export class AuthService {
   getauthStatusListener() {
     return this.authStatusListener.asObservable();
   }
+  getLoadingState() {
+    return this.loadingState.asObservable();
+  }
 
 
   login(
@@ -84,7 +98,7 @@ export class AuthService {
           this.isAuthenticated = true
           this.userId = result.user._id
           this.authStatusListener.next(true)
-
+          this.loadingState.next(false)
           const currentDate = new Date();
           const expirationDate = new Date(currentDate.getTime() + expiresInDuration*1000);
           this.saveAuthData(token,expirationDate,this.userId)
@@ -95,6 +109,8 @@ export class AuthService {
       },
         error => {
           this.authStatusListener.next(false)
+          this.loadingState.next(false)
+
         }
       )
   }

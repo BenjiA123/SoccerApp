@@ -3,11 +3,13 @@ const userRouter = express.Router();
 const UserController = require("../controllers/userController")
 const AuthController = require("../controllers/authController")
 
-userRouter.post("/signup", AuthController.signup);
+userRouter.post("/signup",AuthController.verifyMail);
+userRouter.patch('/signup/:token', AuthController.signup)
 userRouter.post("/login", AuthController.login);
 
 userRouter.post("/forgot-password", AuthController.forgotPassword);
 userRouter.patch("/reset-password/:resetToken", AuthController.resetPassword);
+
 
 
 userRouter.get('', UserController.getUsers)
@@ -20,7 +22,7 @@ userRouter.route('/me').get(AuthController.protect,UserController.getMe)
 
 userRouter.patch('/update-my-password',AuthController.protect,AuthController.updatePassword)
 
-userRouter.get('/:username',AuthController.protect,UserController.getOneByUserName)
+userRouter.get('/:username',UserController.getOneByUserName)
 
 
 userRouter.get('/users-around/:distance/center/:latlng/unit/:unit',AuthController.protect,UserController.getUsersAroundMe)

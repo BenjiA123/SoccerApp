@@ -11,17 +11,19 @@ const BACKEND_USER_URL = environment.apiUrl + "/users";
 })
 export class PostService {
   private posts: Post[] = [];
-  private postsUpdated = new Subject<Post[]>();
+  private postsUpdated = new Subject<{posts:Post[],totalPosts:number}>();
   constructor(private http: HttpClient, private router: Router) {}
 
-  getPosts() {
+  postCount
+  getPosts(limit:number,sort:string,page:number) {
 
     // Set this.posts to something
-   this.http.get(`${BACKEND_URL}`)
+   this.http.get(`${BACKEND_URL}?limit=${limit}&sort=${sort}&page=${page}`)
    .subscribe(
     (postData:any)=>{
       this.posts = postData.doc
-      this.postsUpdated.next([...this.posts])
+      this.postCount = postData.totalCount
+      this.postsUpdated.next({posts:[...this.posts],totalPosts:postData.totalCount})
     }
   )
 }
@@ -40,8 +42,8 @@ export class PostService {
     // You are sending an Image file ,not an imagePath
     if(image !=null)  postData.append("imagePath", image, title);
     this.http
-      .post<{ status: string; data: Post }>(BACKEND_URL, postData)
-      .subscribe((responseData) => {
+      .post<{ status: string; data: Post;totalPosts:number }>(BACKEND_URL, postData)
+      .subscribe((responseData:any) => {
         const post: Post = {
           _id: responseData.data._id,
           title: title,
@@ -51,7 +53,7 @@ export class PostService {
         };
         
         this.posts.push(post);
-        this.postsUpdated.next([...this.posts]);
+        this.postsUpdated.next({posts:[...this.posts],totalPosts:responseData.totalCount});
 
       });
   }
@@ -59,10 +61,10 @@ export class PostService {
   
   deletePost(postId: string) {
     this.http.delete(`${BACKEND_URL}/${postId}`)
-    .subscribe( () =>{ 
+    .subscribe( (deleteData:any) =>{ 
         const updatedPosts = this.posts.filter(post => post._id !== postId)
         this.posts = updatedPosts
-        this.postsUpdated.next([...this.posts]);
+        this.postsUpdated.next({posts:[...this.posts],totalPosts:deleteData.totalCount});
 })
 
 }

@@ -17,6 +17,7 @@ export class UserProfileService {
 
   // On click of Link, get user and display on user page
   getUserByUsername(username){
+    if(username == null){}
   return  this.http.get(`${BACKEND_URL}/${username}`)
   }
 

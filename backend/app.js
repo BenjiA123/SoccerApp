@@ -29,8 +29,8 @@ console.log(process.env.JWT_EXPIRES_IN)
 mongoose
   .connect(
     // Change on production
-    "mongodb://localhost:27017/blurt",
-    // DB,
+    // "mongodb://localhost:27017/blurt",
+    DB,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => {

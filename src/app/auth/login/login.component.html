@@ -11,7 +11,7 @@
         </lottie-animation-view>
     </div>
 
-    <h1 *ngIf="!isLoading">Login</h1>
+    <h1 *ngIf="!isLoading">LOGIN</h1>
 
     <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
         <mat-form-field appearance="outline">
@@ -33,3 +33,11 @@
 
     </form>
 </mat-card>
+
+<a  *ngIf="!isLoading" routerLink ="/auth/forgot-password" class="forgot_password" color="primary">
+    <h5><strong>forgot password ?</strong></h5>
+</a>
+
+<a  *ngIf="!isLoading" routerLink ="/auth/signup" class="sign_up" color="primary">
+    <h5><strong>Sign Up</strong></h5>
+</a>

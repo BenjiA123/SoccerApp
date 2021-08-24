@@ -17,6 +17,8 @@ import { FormsModule } from '@angular/forms';
 import {MyProfileComponent} from './myProfile/my-profile.component';
 import { LottieAnimationViewModule } from 'ng-lottie';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,

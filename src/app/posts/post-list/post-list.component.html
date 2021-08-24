@@ -3,40 +3,48 @@
     </lottie-animation-view>
 </div>
 
-<mat-card class="post_card" *ngFor="let post of posts">
+<div >
 
-    <strong>{{post.title}}</strong> <span class="created_at_span">{{post.created_at | date:'fullDate'}}</span>
-    <br>
-    <span [routerLink]="['/user',post.creator.username]" class="post_username">@{{post.creator.username}}</span>
-    <br>
-    <div *ngIf="post.imagePath" class="post-image"  >
-        <img [src]="post.imagePath" [alt]="post.title">
-    </div>
-    <br>
-    <p>{{post.content}}</p>
-    <div *ngFor="let commentData of comments">
-    <p class="comment_reference"  *ngIf="post._id === commentData.postId" [routerLink]="['/user',commentData.senderId.username]">
-        {{commentData.comment |json}} <span class="posted__by">postedBy</span> @{{commentData.senderId.username | json }}</p>
-    </div>
-<br>
-<br>
-    <mat-action-row class="comment__btns">
 
-        <button *ngIf="userIsAuthenticated"
-         (click)="getCommentsOnOnePost(post._id)" 
-         mat-stroked-button color="primary" >Comments</button>
-    
-    
-    
-            <button mat-button *ngIf="userIsAuthenticated" color="primary"
-            (click)="openCommentDialog(post._id)"><mat-icon>comment</mat-icon></button>
-    
-            
-            <button mat-button *ngIf="userIsAuthenticated && userId == post.creator" color="warn"
-                (click)="onDelete(post._id)"><mat-icon>delete</mat-icon></button>
-        </mat-action-row>   
+    <mat-card  class="post_card" *ngFor="let post of posts">
 
-</mat-card>
+        <strong>{{post.title}}</strong> <span class="created_at_span">{{post.created_at | date:'fullDate'}}</span>
+        <br>
+        <p [routerLink]="['/user',post.creator.username]" class="post_username">@{{post.creator.username}}</p>
+        <br>
+        <div *ngIf="post.imagePath" class="post-image"  >
+            <img [src]="post.imagePath" [alt]="post.title">
+        </div>
+        <br>
+        <p>{{post.content}}</p>
+        <div *ngFor="let commentData of comments">
+        <p class="comment_reference"  *ngIf="post._id === commentData.postId" [routerLink]="['/user',commentData.senderId.username]">
+            {{commentData.comment |json}} <span class="posted__by">postedBy</span> @{{commentData.senderId.username | json }}</p>
+        </div>
+    <br>
+    <br>
+        <mat-action-row class="comment__btns">
+    
+            <button *ngIf="userIsAuthenticated"
+             (click)="getCommentsOnOnePost(post._id)" 
+             mat-stroked-button color="primary" >Comments</button>
+        
+        
+        
+                <button mat-button *ngIf="userIsAuthenticated" color="primary"
+                (click)="openCommentDialog(post._id)"><mat-icon>comment</mat-icon></button>
+        
+                
+                <button mat-button *ngIf="userIsAuthenticated && userId == post.creator" color="warn"
+                    (click)="onDelete(post._id)"><mat-icon>delete</mat-icon></button>
+            </mat-action-row>   
+    
+    </mat-card>
+
+
+
+
+</div>
 
 
 <!-- <mat-card class="side_bar">

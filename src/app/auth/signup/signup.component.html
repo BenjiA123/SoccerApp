@@ -37,6 +37,23 @@
 
         </mat-form-field>
 
+
+
+
+        <!-- <mat-form-field>
+
+            <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>Item 1</button>
+              <button mat-menu-item>Item 2</button>
+            </mat-menu>
+
+        </mat-form-field> -->
+
+
+
+
+
         <mat-form-field appearance="outline">
             <input matInput name="username" required placeholder="Username:" #usernameInput="ngModel" ngModel type="string">
             <mat-error *ngIf="!usernameInput">Please enter your Username </mat-error>

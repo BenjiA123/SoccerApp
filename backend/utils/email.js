@@ -1,10 +1,10 @@
 const nodemailer = require('nodemailer');
-// const pug = require('pug');
-// const htmlToText = require('html-to-text')
+
 
 module.exports = class Email{
   constructor(user,url){
-    this.to =user.email
+
+    this.to =user.email 
     this.firstname = user.name.split(' ')[0]
     this.url= url
     this.from = `"Football Club Hpuse Team" <${process.env.EMAIL_FROM}>`
@@ -13,16 +13,16 @@ module.exports = class Email{
   newTransport(){
     if(process.env.NODE_ENV === 'production'){
       // SEND GRID
-      // return nodemailer.createTransport({
-      //   service:'SendGrid',
-      //   auth:{
-      //     user: SENDGRID_USERNAME,
-      //     pass: SENDGRID_PASSWORD,
-      //   }
-      // })
-      return 1 //Just a place holder till i fix sendGrid
+      return nodemailer.createTransport({
+        service:'SendGrid',
+        auth:{
+          user: process.env.SENDGRID_USERNAME, //for some reason the user isnt defined
+          pass: process.env.SENDGRID_PASSWORD,
+        }
+      })
     }
 
+    // Mail Trap
     return nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port:process.env.EMAIL_PORT,
@@ -34,32 +34,26 @@ module.exports = class Email{
   }
 
   async send(template,subject){
-    // Render with Angular
-    // const html = pug.renderFile(`${__dirname}/../views/email/${template}.pug`,
-    // {
-    //   firstName:this.firstname,
-    //   url:this.url,
-    //   subject
-    // })
 
     const  mailOptions = {
       from: this.from,
       to:this.to,
       subject,
-      // html,
-      // text:htmlToText.fromString(html)
+      html:`${template}  \n ${this.url}`,
+      text:`${template}`
   };
   
-  this.newTransport().sendMail(mailOptions)
+  await this.newTransport().sendMail(mailOptions)
 
   }
 
   async sendWelcome(){
-    await this.send('Welcome',"Welcome to the natours Family")
+    // Angular would handle this
+    await this.send('<p>Welcome</p>',"Welcome to the F Club House Family")
   }
 
-  async sendPasswordReset(){
-    await this.send('passwordReset','Your Password reset token is valid for 10 minutes')
+  async  sendPasswordReset(){
+    await this.send('<p>passwordReset</p>','Your Password reset token is valid for 10 minutes')
   }
 }
 

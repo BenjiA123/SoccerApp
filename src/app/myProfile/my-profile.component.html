@@ -1,9 +1,9 @@
 <mat-card class="example-card">
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title>{{myInfo?.username }}</mat-card-title>
       <mat-card-subtitle>{{myInfo?.clubName }}</mat-card-subtitle>
     </mat-card-header>
+    <!-- Image giving erroe for no reason -->
     <img mat-card-image [src]="myInfo?.imagePath" [alt]="myInfo?.username">
     <mat-card-content>
       <p>
@@ -17,11 +17,11 @@
   </mat-card>
   
 
-  <!-- <mat-card class="post_card" *ngFor="let post of posts i">
+   <mat-card class="post_card" *ngFor="let post of posts">
 
     <strong>{{post.title}}</strong> <span class="created_at_span">{{post.created_at | date:'fullDate'}}</span>
     <br>
-    <span [routerLink]="['/user',post.creator.username]" class="post_username">@{{post.creator.username}}</span>
+    <span class="post_username">@{{post.creator.username}}</span>
     <br>
     <div *ngIf="post.imagePath" class="post-image"  >
         <img [src]="post.imagePath" [alt]="post.title">
@@ -44,4 +44,4 @@
                 (click)="onDelete(post._id)"><mat-icon>delete</mat-icon></button>
         </mat-action-row>   
 
-</mat-card> -->
+</mat-card>

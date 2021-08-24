@@ -23,8 +23,10 @@ const catchAsync = require('../utils/catchAsync')
   catchAsync(async (req,res,next)=>{
     
       const doc = await Model.create(req.body)
+      const totalCount = await Model.count()
 
       res.status(200).json({
+        totalCount,
           status:'success',
           doc
       })
@@ -37,7 +39,10 @@ exports.delete = Model =>  catchAsync(async (req, res, next) => {
     return next(new AppError(`No document Found this with ID`, 404));
   }
 
+  const totalCount = await Model.count()
+
   res.status(204).json({
+    totalCount,
     status: 'success',
     data: 'Document Successfully Deleted',
   });
@@ -90,7 +95,7 @@ exports.filterFunction = (Model)=>
     exports.getAll = Model =>
 
  catchAsync(async (req, res, next) => {
-    let filter = {};
+    let filter = {active:{$ne:false}};
     if (req.params.tourId) filter = { tour: req.params.tourId };
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()
@@ -99,7 +104,10 @@ exports.filterFunction = (Model)=>
       .paginate();
     // const doc = await features.query.explain(); //The explain method explains the whole document
     const doc = await features.query
+
+    const totalCount = await Model.count()
     res.status(200).json({
+      totalCount,
       status: 'success',
       result: doc.length,
       doc,

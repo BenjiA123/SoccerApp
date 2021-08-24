@@ -7,6 +7,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { CommentDialogComponent } from './post-list/comment-dialog/comment-dialog.component';
 import { LottieAnimationViewModule } from 'ng-lottie';
+// import { NgxScrollEventModule } from 'ngx-scroll-event';
 
 @NgModule({
     declarations: [
@@ -17,6 +18,7 @@ import { LottieAnimationViewModule } from 'ng-lottie';
     imports: [
         CommonModule,
         RouterModule,
+        // NgxScrollEventModule,
         FormsModule,
         ReactiveFormsModule,
         AngularMaterialModule, LottieAnimationViewModule.forRoot(),

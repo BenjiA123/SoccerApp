@@ -7,19 +7,22 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing-module';
 import { LottieAnimationViewModule } from 'ng-lottie';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 
 @NgModule({
     declarations: [
         SignupComponent,
-        LoginComponent
+        LoginComponent,
+        ForgotPasswordComponent
     ],
     imports: [
         AngularMaterialModule,
         CommonModule,
         RouterModule,
-        FormsModule,LottieAnimationViewModule.forRoot(),
+        FormsModule,
+        LottieAnimationViewModule.forRoot(),
         AuthRoutingModule
 
     ]
