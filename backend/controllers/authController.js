@@ -1,3 +1,6 @@
+const sgMail = require('@sendgrid/mail')
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
 const { promisify } = require("util");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
@@ -47,30 +50,45 @@ const createSendToken = (user, statusCode, res) => {
     req.body.imagePath = 
     "https://firebasestorage.googleapis.com/v0/b/f-clubhouse.appspot.com/o/default.jpg?alt=media&token=24799aba-9374-4a63-8518-d7fc30c99a95"
 
-    const newUser = await User.create({
+    const user = await User.findOne({
+      email:req.body.email
+    })
+
+
+    const xuser ={
       name: req.body.name,
       username: req.body.username,
       clubName:req.body.clubName,
       imagePath:req.body.imagePath,
       email: req.body.email,
-      active:false,
       description:`Hey, my name is ${req.body.name} and .
         I love ${req.body.clubName}
       `,
       locationCordinate:req.body.locationCordinate,
       password: req.body.password, //It WORKED....... WHY
-      passwordConfirm:req.body.passwordConfirm
-    });
+
+    }
+    let newUser
+    if(user){
+      newUser = user
+    if(user.status =="Active" || !user.status){
+      res.status(200).json({ 
+        status:"success",
+        message:"You have already been activated, go to Login Page"
+      })
+      return
+    }
+    
+    }else{newUser = await User.create(xuser);}
 
   const resetToken = newUser.createToken(); 
+  await user.save({ validateBeforeSave: false });
 
     try{ 
-    const resetUrl = `${req.protocol}://${req.get('host')}/api/verify-email/${resetToken}`
+    const resetUrl = `${req.protocol}://${req.get('host')}/api/signup/${resetToken}`
 
 
-console.log(newUser) //
-    const email = await new Email(newUser,resetUrl)
-    email.sendWelcome()
+  await new Email(newUser,resetUrl).sendWelcome()
 
   res.status(200).json({ 
     status:"success",
@@ -93,30 +111,23 @@ console.log(newUser) //
 
   exports.signup = catchAsync(async (req,res,next)=>{
     const hashedToken = crypto.createHash('sha256').update(req.params.token).digest('hex');
-
     const user = await User.findOne({
       token: hashedToken,
       tokenExpires:{ $gt: Date.now() },
     });
     // Check if there is a user
     if (!user) {
+      user.token = undefined;
+      user.tokenExpires=undefined
       return next(new AppError('Token is Invalid or has expired', 400));
     }
-    user.token = undefined;
-    user.tokenExpires=undefined
   
-    await user.save();
+    user.status = "Active"
+    await user.save({ validateBeforeSave: false });
   
     // Log user in with JWT
     createSendToken(user, 200, res);
   })
-
-
-
-
-
-
-
 
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -202,11 +213,10 @@ exports.restrictTo = (...roles) => {
 
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
-  // Get user based on posted email
+
   const user = await User.findOne({
     email: req.body.email,
-  });
-  console.log(user)
+  })
   if (!user) return next(new AppError('No user exists with this email ', 404));
 
   // Generates Random reset token
@@ -215,24 +225,28 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   // Send it to users email
   
   
- 
-  try{
-    const resetUrl = `${req.protocol}://${req.get('host')}/api/reset-passworrd/${resetToken}`
-    await new Email(user,resetUrl).sendPasswordReset()
-  res.status(200).json({
-    status:"success",
-    message:"Token send to email"
-  })
-  }
-  catch (error) {
-      console.log(error);
+
+    // The token sent should serve an angular Page
+
+    const resetUrl = `${req.protocol}://${req.get('host')}/auth/reset-password/${resetToken}`
+    try {
+      await new Email(user,resetUrl).sendResetToken()
+      res.status(200).json({
+        status:"success",
+        message:"Token has been sent to Your Email😊"
+      })
+    } catch (error) {
+      console.log(error)
+
       user.token = undefined;
       user.tokenExpires = undefined;
-      await user.save({ validateBeforeSave: false });
+       user.save({ validateBeforeSave: false });
       return next(
         new AppError('Their was an error sending this email. Try again later', 500)
       );
-  }
+      
+    }
+   
  
 });
 

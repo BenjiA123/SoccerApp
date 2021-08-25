@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing-module';
 import { LottieAnimationViewModule } from 'ng-lottie';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './forgot-password/reset-password/reset-password.component';
+import { VerifyEmailComponent } from './signup/verify-email/verify-email.component';
 
 
 
@@ -15,7 +17,9 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     declarations: [
         SignupComponent,
         LoginComponent,
-        ForgotPasswordComponent
+        ForgotPasswordComponent,
+        ResetPasswordComponent,
+        VerifyEmailComponent
     ],
     imports: [
         AngularMaterialModule,

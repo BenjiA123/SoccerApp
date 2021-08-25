@@ -54,7 +54,7 @@ imagePath:{
 },
 active:{
   type:Boolean,
-  default:false,
+  default:true,
   required:true,
 
 },
@@ -67,26 +67,16 @@ status: {
   enum: ['Pending', 'Active'],
   default: 'Pending'
 },
-token:String,
-tokenExpires:Date,
+token:
+{type:String},
+tokenExpires:{type:Date},
 
 // Create the location at where the blurt was made.... nahhhhhh
-locationCordinate: [Number],
+locationCordinate:{type: [Number],required:false},
 })
 
 
-userSchema.methods.createToken = function(){
-  const token = crypto.randomBytes(32).toString('hex')
 
-this.token= crypto
-.createHash('sha256')
-.update(token)
-.digest('hex')
-
-this.tokenExpires = Date.now() + 10 *60*1000
-return token
-
-}
 
 
 
@@ -121,6 +111,20 @@ userSchema.pre('save', async function (next) {
     return await bcrypt.compare(candidatePassword, userPassword);
   };
 
+  userSchema.methods.createToken = function(){
+    const token = crypto.randomBytes(32).toString('hex')
+  
+    // This is not storing data in the database 
+  this.token = crypto
+  .createHash('sha256')
+  .update(token)
+  .digest('hex')
+  
+  this.tokenExpires = Date.now() + 10 *60*1000
+  // console.log("Token on database",this.token)
+  return token
+  
+  }
 
 
 userSchema.plugin(uniqueValidator)

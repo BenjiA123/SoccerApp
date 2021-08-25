@@ -21,12 +21,17 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router) { }
 
 
-// /users/forgot-password
   forgotPassword(email:any){
-  return  this.http.post(`${BACKEND_URL}/forgot-password`,email)
+  return  this.http.post(`${BACKEND_URL}/forgot-password`,{email})
   }
 
+  resetPassword(passwordData:any,token:string){
+    return  this.http.patch(`${BACKEND_URL}/reset-password/${token}`,passwordData)
+    }
 
+    verifyEmail(token:string){
+      return  this.http.patch(`${BACKEND_URL}/signup/${token}`,null)
+      }
 
 
 
@@ -52,7 +57,7 @@ export class AuthService {
     }
     this.http.post(BACKEND_URL + '/signup', authData)
       .subscribe(result => {
-        this.login(email,password,clubName,username,name,passwordConfirm)
+        alert("Check Your Email For A Verification Code")
         this.router.navigate(["/"])
       },
         error => {

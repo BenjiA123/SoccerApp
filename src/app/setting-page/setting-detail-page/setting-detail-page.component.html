@@ -91,7 +91,7 @@
 
       <mat-form-field appearance="outline">
         <input matInput name="currentPassword" required placeholder="Current Password:" #currentPasswordInput="ngModel" ngModel type="password">
-        <!-- <mat-error *ngIf="!currentPassword">Please enter a valid password</mat-error> -->
+        <mat-error *ngIf="!currentPasswordInput">Please enter a valid password</mat-error>
   
     </mat-form-field>
 
@@ -100,14 +100,14 @@
       
     <mat-form-field appearance="outline">
       <input matInput name="password" required placeholder="Password:" #passwordInput="ngModel" ngModel type="password">
-      <!-- <mat-error *ngIf="!password">Please enter a valid password</mat-error> -->
+      <mat-error *ngIf="!passwordInput">Please enter a valid password</mat-error>
 
   </mat-form-field>
 
 
     <mat-form-field appearance="outline">
       <input matInput name="passwordConfirm" required placeholder="Password Confirm:" #passwordConfirmInput="ngModel" ngModel type="password">
-      <!-- <mat-error *ngIf="!passwordConfirm">Please enter a valid PassWord Confirm</mat-error> -->
+      <mat-error *ngIf="!passwordConfirmInput">Please enter a valid PassWord Confirm</mat-error>
 
   </mat-form-field>
 

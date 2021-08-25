@@ -2,6 +2,9 @@
   "name": "sch-anonym",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "debug":"ndb server.js"
+  },
   "dependencies": {
     "animate.css": "^3.7.2",
     "bcryptjs": "^2.4.3",

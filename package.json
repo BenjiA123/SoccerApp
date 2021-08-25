@@ -24,6 +24,7 @@
     "@angular/pwa": "^0.803.19",
     "@angular/router": "~8.2.0",
     "@angular/service-worker": "~8.2.0",
+    "@sendgrid/mail": "^7.4.6",
     "animate.css": "^3.7.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",

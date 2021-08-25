@@ -16,12 +16,12 @@ export class ForgotPasswordComponent implements OnInit {
 
   forgotPassword(form:NgForm){
     if(form.invalid) {return}
-    console.log("res")
 
     this.authService.forgotPassword(form.value.email)
     .subscribe(
-      (res)=>{
-        console.log(res)
+      (res:any)=>{
+        alert(res.message)
+
       }
     )
 

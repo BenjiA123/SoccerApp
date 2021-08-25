@@ -1,0 +1,14 @@
+.verify_btn {
+  width: 47%;
+  position: absolute;
+  left: 29%;
+  top: 40%;
+}
+
+.verify_header {
+  width: 85%;
+  position: absolute;
+  left: 25%;
+  top: 30%;
+  color: blue;
+}
