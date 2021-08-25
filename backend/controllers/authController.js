@@ -150,10 +150,32 @@ if (!user || !(await user.correctPassword(password, user.password))) {
 }
 
 if (user.status != "Active") {
-  return res.status(401).send({
-    message: `Pending Account.\n An emaul has been sent to${user.email} Please Verify Your Email!`,
-  });
-}
+
+
+  const resetToken = user.createToken();
+
+  try{ 
+    const resetUrl = `${req.protocol}://${req.get('host')}/api/signup/${resetToken}`
+
+
+  await new Email(user,resetUrl).sendWelcome()
+
+  res.status(200).json({ 
+    status:"success",
+    message:`Pending Account.\n An email has been sent to ${user.email}
+    Please Verify Your Email!`
+  })
+  }
+  catch (error) {
+      console.log(error);
+      user.token = undefined;
+      await user.save({ validateBeforeSave: false });
+      return next(
+        new AppError('Their was an error sending this verification email. Try again later', 500)
+      );
+  }
+
+}else{
 
   const token = signToken(user._id);
     // I prevented the password from coming up in the search
@@ -164,7 +186,7 @@ if (user.status != "Active") {
     token,
     expiresIn:90000000,
     user,
-  });
+  })};
 });
 
 exports.protect = catchAsync(async (req, res, next) => {

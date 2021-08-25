@@ -98,6 +98,8 @@ export class AuthService {
       .subscribe((result:any) => {
         const token = result.token
         this.token = token
+        this.loadingState.next(false)
+
         if (token) {
           const expiresInDuration = result.expiresIn
           this.isAuthenticated = true
@@ -109,6 +111,9 @@ export class AuthService {
           this.saveAuthData(token,expirationDate,this.userId)
 
           this.router.navigate(["/"])
+        }
+        else{
+          alert(result.message)
         }
 
       },
